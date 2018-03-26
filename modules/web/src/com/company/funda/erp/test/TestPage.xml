@@ -13,6 +13,7 @@
             <buttonsPanel>
                 <button invoke="sayHellow"/>
             </buttonsPanel>
+            <button/>
         </flowBox>
     </layout>
 </window>
