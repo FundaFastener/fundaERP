@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://menu-config.WorkRecordInput"
+        class="com.company.funda.erp.web.manufacture.WorkRecordInput"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <datasource id="workRecordDs"
+                    class="com.company.funda.erp.entity.WorkRecord"
+                    view="workRecord-custom-edit"/>
+        <collectionDatasource id="workRecordsDs"
+                              allowCommit="false"
+                              class="com.company.funda.erp.entity.WorkRecord"
+                              datasourceClass="com.company.funda.erp.web.datasource.WorkRecordDatasource"
+                              view="workRecord-custom-edit"/>
+    </dsContext>
+    <actions>
+        <action id="confirm"
+                caption="mainMsg://Confirm"
+                invoke="onConfirm"/>
+        <action id="cancel"
+                caption="mainMsg://Cancel"
+                invoke="onCancel"/>
+        <action id="addItem"
+                caption="msg://addItem"
+                invoke="onAddItem"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <scrollBox id="scrollBox"
+                   height="100%"
+                   spacing="true">
+            <grid spacing="true"
+                  width="100%">
+                <columns count="3"/>
+                <rows>
+                    <row>
+                        <lookupField id="statusField"
+                                     caption="mainMsg://status"
+                                     datasource="workRecordDs"
+                                     property="status"/>
+                        <dateField id="startTimeField"
+                                   caption="mainMsg://startTime"
+                                   datasource="workRecordDs"
+                                   property="startTime"
+                                   resolution="SEC"/>
+                        <dateField id="endTimeField"
+                                   caption="mainMsg://endTime"
+                                   datasource="workRecordDs"
+                                   property="endTime"
+                                   required="true"
+                                   resolution="SEC"/>
+                    </row>
+                </rows>
+            </grid>
+            <fieldGroup id="fieldGroup"
+                        border="visible"
+                        datasource="workRecordDs"
+                        width="100%">
+                <column width="80%">
+                    <field id="finishedQuantityAll"
+                           custom="true"/>
+                    <field id="finishedIncludedLoss"
+                           custom="true"
+                           required="true"
+                           requiredMessage="mainMsg://NotNull"/>
+                    <field property="unitWeight"
+                           required="true"
+                           requiredMessage="mainMsg://NotNull"/>
+                    <field id="setupLossQuantity"
+                           required="true"
+                           requiredMessage="mainMsg://NotNull"/>
+                    <field id="ngLossQuantity"
+                           property="ngLossQuantity"
+                           required="true"
+                           requiredMessage="mainMsg://NotNull"/>
+                    <field id="materialLossQuantity"
+                           property="materialLossQuantity"
+                           required="true"
+                           requiredMessage="mainMsg://NotNull"/>
+                    <field property="remark"
+                           rows="3"/>
+                </column>
+                <column width="80%">
+                    <field property="id"
+                           visible="false"/>
+                    <field property="unit"
+                           required="true"/>
+                    <field editable="false"
+                           property="recordNo"
+                           visible="false"/>
+                    <field property="setupLossUnit"
+                           required="true"/>
+                    <field property="ngLossUnit"
+                           required="true"/>
+                    <field property="materialLossUnit"
+                           required="true"/>
+                    <field editable="false"
+                           property="timeUsed"/>
+                    <field property="workHourType"
+                           required="true"/>
+                </column>
+            </fieldGroup>
+            <buttonsPanel>
+                <button action="confirm"
+                        caption="mainMsg://Confirm"/>
+                <button id="cancelButton"
+                        action="cancel"
+                        caption="mainMsg://Cancel"/>
+            </buttonsPanel>
+            <groupBox id="detachGB"
+                      caption="msg://detachWorkRecord"
+                      collapsable="true">
+                <vbox spacing="true">
+                    <flowBox spacing="true">
+                        <lookupField id="wrStatusField"
+                                     caption="mainMsg://status"
+                                     optionsEnum="com.company.funda.erp.enums.WorkRecordStatus"
+                                     requiredMessage="mainMsg://PleaseInputStatus"/>
+                        <textField id="wrTimeUsedField"
+                                   caption="mainMsg://timeUsed"
+                                   datatype="int"
+                                   requiredMessage="mainMsg://PleaseInputTimeused"/>
+                        <textArea id="wrRemarkTextArea"
+                                  caption="mainMsg://remark"
+                                  rows="3"/>
+                        <button action="addItem"
+                                caption="mainMsg://addItem"/>
+                    </flowBox>
+                    <table id="workRecordsTable"
+                           height="100px"
+                           width="70%">
+                        <actions>
+                            <action id="remove"
+                                    caption="msg://remove"
+                                    invoke="onRemove"/>
+                        </actions>
+                        <columns>
+                            <column id="status"/>
+                            <column id="timeUsed"/>
+                            <column id="remark"/>
+                        </columns>
+                        <rows datasource="workRecordsDs"/>
+                    </table>
+                </vbox>
+            </groupBox>
+        </scrollBox>
+    </layout>
+</window>

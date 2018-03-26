@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://workOrderEditor"
+        class="com.company.funda.erp.web.crud.workorder.WorkOrderEdit"
+        datasource="workOrderDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <datasource id="workOrderDs"
+                    class="com.company.funda.erp.entity.WorkOrder"
+                    view="workOrder-mostly"/>
+        <collectionDatasource id="inventoryItemsDs"
+                              class="com.company.funda.erp.entity.InventoryItem"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from fe$InventoryItem e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="defaultMachinesDs"
+                              class="com.company.funda.erp.entity.Machine"
+                              view="machine-view">
+            <query>
+                <![CDATA[select e from fe$Machine e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="backupMachinesesDs"
+                              class="com.company.funda.erp.entity.Machine"
+                              view="machine-view">
+            <query>
+                <![CDATA[select e from fe$Machine e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="workOrderDs">
+            <column width="250px">
+                <field property="no"/>
+                <field optionsDatasource="inventoryItemsDs"
+                       property="inventoryItem"/>
+                <field property="quantity"/>
+                <field property="unit"/>
+                <field property="processType"/>
+                <field optionsDatasource="defaultMachinesDs"
+                       property="defaultMachine"/>
+                <field optionsDatasource="backupMachinesesDs"
+                       property="backupMachines"/>
+                <field property="status"/>
+                <field property="remark"
+                       rows="5"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

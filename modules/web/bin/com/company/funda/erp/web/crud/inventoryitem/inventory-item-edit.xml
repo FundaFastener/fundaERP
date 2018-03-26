@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://inventoryItemEditor"
+        class="com.company.funda.erp.web.crud.inventoryitem.InventoryItemEdit"
+        datasource="inventoryItemDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <datasource id="inventoryItemDs"
+                    class="com.company.funda.erp.entity.InventoryItem"
+                    view="_local"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="inventoryItemDs">
+            <column width="250px">
+                <field property="no"/>
+                <field property="name1"/>
+                <field property="name2"/>
+                <field property="category"/>
+                <field property="materialWeight"/>
+                <field property="netWeight"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

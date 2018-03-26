@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://PickUpOperatorAndMachine"
+        class="com.company.funda.erp.web.manufacture.PickUpOperatorAndMachine"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <collectionDatasource id="departmentsDs"
+                              allowCommit="false"
+                              class="com.company.funda.erp.entity.Department"
+                              view="department-view">
+            <query>
+                <![CDATA[select e from fe$Department e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="employeesDs"
+                              allowCommit="false"
+                              class="com.company.funda.erp.entity.Employee"
+                              view="_local">
+            <query>
+                <![CDATA[select e 
+from fe$Employee e
+order by case when e.department.id = :ds$departmentsDs then 1
+                   else 2
+         end asc]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="machinesDs"
+                              allowCommit="false"
+                              class="com.company.funda.erp.entity.Machine"
+                              view="_local">
+            <query>
+                <![CDATA[select e from fe$Machine e
+where e.department.id = :ds$departmentsDs
+order by e.no asc]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <tabSheet align="TOP_CENTER"
+                  caption="msg://PickUpOperatorAndMachine"
+                  width="AUTO">
+            <tab caption="msg://forming"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <vbox spacing="true"
+                      width="AUTO">
+                    <lookupField id="departmentsField"
+                                 caption="mainMsg://department"
+                                 nullOptionVisible="false"
+                                 optionsDatasource="departmentsDs"
+                                 required="true"
+                                 requiredMessage="msg://error.pick.department"/>
+                    <lookupField id="employeesField"
+                                 caption="mainMsg://charge"
+                                 optionsDatasource="employeesDs"
+                                 required="true"
+                                 requiredMessage="msg://error.pick.employee"/>
+                    <lookupField id="machinesField"
+                                 caption="mainMsg://machine"
+                                 optionsDatasource="machinesDs"
+                                 required="true"
+                                 requiredMessage="msg://error.pick.Machine"/>
+                    <button id="pickupWorkOrder"
+                            caption="mainMsg://pickWorkOrder"
+                            invoke="onPickupWorkOrderClick"/>
+                </vbox>
+            </tab>
+        </tabSheet>
+    </layout>
+</window>

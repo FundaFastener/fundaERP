@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://departmentEditor"
+        class="com.company.funda.erp.web.crud.department.DepartmentEdit"
+        datasource="departmentDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <datasource id="departmentDs"
+                    class="com.company.funda.erp.entity.Department"
+                    view="department-with-manager"/>
+        <collectionDatasource id="employeesDs"
+                              class="com.company.funda.erp.entity.Employee"
+                              view="employee-view">
+            <query>
+                <![CDATA[select e from fe$Employee e
+where e.department.id = :ds$departmentDs
+order by e.firstNameEn]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="departmentDs">
+            <column width="250px">
+                <field property="no"/>
+                <field property="name"/>
+                <field datasource="departmentDs"
+                       optionsDatasource="employeesDs"
+                       property="managedBy"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

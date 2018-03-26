@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://pickupWorkOrder"
+        class="com.company.funda.erp.web.manufacture.PickUpWorkOrder"
+        messagesPack="com.company.funda.erp.web.manufacture">
+    <dsContext>
+        <collectionDatasource id="workOrdersDs"
+                              class="com.company.funda.erp.entity.WorkOrder"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from fe$WorkOrder e
+where e.defaultMachine.id = :custom$machineId
+and e.status <> @enum(com.company.funda.erp.enums.WorkOrderStatus.FINISHED)]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <tabSheet align="TOP_CENTER"
+                  width="AUTO">
+            <tab caption="msg://forming"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <vbox align="TOP_CENTER"
+                      spacing="true"
+                      width="AUTO">
+                    <textField id="chargeField"
+                               align="TOP_CENTER"
+                               caption="mainMsg://charge"
+                               editable="false"/>
+                    <textField id="machineField"
+                               align="TOP_CENTER"
+                               caption="mainMsg://machine"
+                               editable="false"/>
+                    <lookupField id="lookupField"
+                                 align="TOP_CENTER"
+                                 caption="mainMsg://workOrderList"
+                                 optionsDatasource="workOrdersDs"
+                                 required="true"/>
+                    <button align="TOP_CENTER"
+                            caption="mainMsg://goToWorkOrderOperate"
+                            invoke="goToWorkOrderOperate"/>
+                </vbox>
+            </tab>
+        </tabSheet>
+    </layout>
+</window>

@@ -1,0 +1,27 @@
+/* Define your theme modifications inside next mixin */
+@mixin com_company_funda_erp-halo-ext {
+
+	 @include halo;
+	 
+	 .myFieldBorderInError{
+	 	background-color: red;
+	 }
+
+	 .groupBoxBackgroundColor{
+	 	background-color: #c6c6c6;
+	 }
+	 
+	 .v-textfield-readonly{
+	 	background-color: #c6c6c6;
+	 }
+	 
+	 .notablyButtonColor{
+	    background: red;
+    	color: white;
+	 }
+	 
+	 .whiteBackground{
+	 	background-color: #F0F8FF;
+	 }
+
+}

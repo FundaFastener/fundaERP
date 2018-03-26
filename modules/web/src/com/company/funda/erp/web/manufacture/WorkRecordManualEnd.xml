@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://pleaseInputWorkRecordEndTime"
+        class="com.company.funda.erp.web.manufacture.WorkRecordManualEnd"
+        messagesPack="com.company.funda.erp.web.manufacture">
+    <actions>
+        <action id="confirm"
+                caption="mainMsg://Confirm"
+                invoke="confirm"/>
+        <action id="cancel"
+                caption="mainMsg://Cancel"
+                invoke="cancel"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <vbox align="MIDDLE_CENTER"
+              height="200px"
+              spacing="true"
+              width="400px">
+            <grid height="71px"
+                  spacing="true"
+                  width="110px">
+                <columns count="2"/>
+                <rows>
+                    <row>
+                        <label id="workOrderName"
+                               height="16px">
+                            <formatter class="com.company.funda.erp.gui.format.ColonFormatter"/>
+                        </label>
+                        <label id="workOrderDesc"/>
+                    </row>
+                    <row>
+                        <label id="workRecordName">
+                            <formatter class="com.company.funda.erp.gui.format.ColonFormatter"/>
+                        </label>
+                        <label id="workRecordDesc"/>
+                    </row>
+                </rows>
+            </grid>
+            <hbox spacing="true">
+                <dateField id="manualEndTime"
+                           required="true"
+                           resolution="SEC"/>
+            </hbox>
+            <buttonsPanel align="TOP_CENTER">
+                <button action="confirm"/>
+                <button action="cancel"/>
+            </buttonsPanel>
+        </vbox>
+    </layout>
+</window>

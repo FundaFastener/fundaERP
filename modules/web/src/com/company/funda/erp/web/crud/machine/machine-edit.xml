@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://machineEditor"
+        class="com.company.funda.erp.web.crud.machine.MachineEdit"
+        datasource="machineDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <datasource id="machineDs"
+                    class="com.company.funda.erp.entity.Machine"
+                    view="machine-department"/>
+        <collectionDatasource id="departmentsDs"
+                              class="com.company.funda.erp.entity.Department"
+                              view="department-view">
+            <query>
+                <![CDATA[select e from fe$Department e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="machineDs">
+            <column width="250px">
+                <field property="no"/>
+                <field property="name"/>
+                <field property="type"/>
+                <field property="processType"/>
+                <field property="brand"/>
+                <field optionsDatasource="departmentsDs"
+                       property="department"/>
+                <field property="remark"
+                       rows="5"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

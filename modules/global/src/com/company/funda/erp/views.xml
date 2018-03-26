@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view class="com.company.funda.erp.entity.Company"
+          extends="_local"
+          name="company-view"/>
+    <view class="com.company.funda.erp.entity.Machine"
+          extends="_local"
+          name="machine-department">
+        <property name="department"
+                  view="_minimal">
+            <property name="name"/>
+        </property>
+    </view>
+    <view class="com.company.funda.erp.entity.Department"
+          extends="_local"
+          name="department-with-manager">
+        <property name="managedBy"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.funda.erp.entity.Employee"
+          extends="_local"
+          name="employee-view">
+        <property name="department"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.funda.erp.entity.WorkOrder"
+          extends="_local"
+          name="workOrder-mostly">
+        <property name="defaultMachine"
+                  view="_minimal">
+            <property name="processType"/>
+        </property>
+        <property name="backupMachines"
+                  view="_minimal">
+            <property name="processType"/>
+        </property>
+        <property name="inventoryItem"
+                  view="_minimal">
+            <property name="materialWeight"/>
+            <property name="netWeight"/>
+        </property>
+    </view>
+    <view class="com.company.funda.erp.entity.Department"
+          extends="_local"
+          name="department-view"/>
+    <view class="com.company.funda.erp.entity.WorkRecord"
+          extends="_local"
+          name="workRecord-with-workOrder-employee">
+        <property name="workOrder"
+                  view="_minimal"/>
+        <property name="employee"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.funda.erp.entity.Machine"
+          extends="_local"
+          name="machine-view"/>
+    <view class="com.company.funda.erp.entity.WorkOrder"
+          extends="_local"
+          name="workOrder-mostly-all">
+        <property name="defaultMachine"
+                  view="_minimal">
+            <property name="type"/>
+            <property name="processType"/>
+            <property name="brand"/>
+            <property name="department"
+                      view="_minimal"/>
+            <property name="remark"/>
+        </property>
+        <property name="inventoryItem"
+                  view="_minimal">
+            <property name="name2"/>
+            <property name="category"/>
+            <property name="materialWeight"/>
+            <property name="netWeight"/>
+        </property>
+        <property name="backupMachines"
+                  view="_minimal">
+            <property name="type"/>
+            <property name="processType"/>
+            <property name="brand"/>
+            <property name="department"
+                      view="_minimal"/>
+            <property name="remark"/>
+        </property>
+    </view>
+    <view class="com.company.funda.erp.entity.WorkRecord"
+          extends="_local"
+          name="workRecord-input">
+        <property name="workOrder"
+                  view="_minimal"/>
+        <property name="employee"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.funda.erp.entity.WorkRecord"
+          extends="_local"
+          name="workRecord-custom-edit">
+        <property name="workOrder"
+                  view="_minimal">
+            <property name="inventoryItem"
+                      view="_minimal">
+                <property name="materialWeight"/>
+                <property name="netWeight"/>
+            </property>
+        </property>
+        <property name="employee"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.funda.erp.entity.InventoryItem"
+          extends="_local"
+          name="inventoryItem-view"/>
+    <view class="com.company.funda.erp.entity.WorkOrder"
+          extends="_local"
+          name="workOrder-view">
+        <property name="inventoryItem"
+                  view="_minimal"/>
+        <property name="defaultMachine"
+                  view="_minimal"/>
+    </view>
+</views>

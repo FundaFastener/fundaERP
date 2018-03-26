@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://NeedContinueFormerUnclosedWorkRecord"
+        class="com.company.funda.erp.web.manufacture.AskUnfinishedWorkRecord"
+        messagesPack="com.company.funda.erp.web.manufacture">
+    <dsContext>
+        <datasource id="workOrderDs"
+                    class="com.company.funda.erp.entity.WorkOrder"
+                    view="workOrder-mostly"/>
+        <datasource id="workRecordDs"
+                    class="com.company.funda.erp.entity.WorkRecord"
+                    view="_local"/>
+    </dsContext>
+    <actions>
+        <action id="proceed"
+                caption="mainMsg://continue"
+                invoke="proceed"/>
+        <action id="manual"
+                caption="mainMsg://manual"
+                invoke="manual"/>
+        <action id="cancel"
+                caption="mainMsg://Cancel"
+                invoke="cancel"/>
+        <action id="interim"
+                caption="msg://interim"
+                invoke="interim"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <vbox spacing="true">
+            <hbox spacing="true">
+                <label value="mainMsg://WorkOrder"/>
+                <label id="workOrderDesc"/>
+            </hbox>
+            <buttonsPanel>
+                <button action="proceed"/>
+                <button action="manual"/>
+                <button action="interim"/>
+            </buttonsPanel>
+        </vbox>
+    </layout>
+</window>
