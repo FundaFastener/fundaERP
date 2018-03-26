@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
+    <menu id="GeneralOperation"
+          insertBefore="administration">
+        <item screen="fe$Company.browse"/>
+        <item screen="fe$Department.browse"/>
+        <item screen="fe$Employee.browse"/>
+        <item screen="fe$InventoryItem.browse"/>
+        <item screen="fe$Machine.browse"/>
+        <item screen="fe$WorkOrder.browse"/>
+        <item screen="fe$WorkRecord.browse"/>
+        <item screen="WorkRecordInput"/>
+        <item screen="WorkRecordManualEnd"/>
+        <item screen="AskUnfinishedWorkRecord"/>
+    </menu>
+    <menu id="ManufacturingControlSystem"
+          insertBefore="administration">
+        <item screen="WorkOrderPortal"/>
+    </menu>
+</menu-config>

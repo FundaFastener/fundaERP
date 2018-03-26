@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://workOrderBrowse"
+        class="com.company.funda.erp.web.crud.workorder.WorkOrderBrowse"
+        focusComponent="workOrdersTable"
+        lookupComponent="workOrdersTable"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <groupDatasource id="workOrdersDs"
+                         class="com.company.funda.erp.entity.WorkOrder"
+                         view="workOrder-view">
+            <query>
+                <![CDATA[select e from fe$WorkOrder e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="workOrdersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="workOrdersTable"
+                datasource="workOrdersDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="workOrdersTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="no"/>
+                <column id="quantity"/>
+                <column id="unit"/>
+                <column id="processType"/>
+                <column id="status"/>
+                <column id="inventoryItem"/>
+                <column id="defaultMachine"/>
+                <column id="remark"/>
+            </columns>
+            <rows datasource="workOrdersDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="workOrdersTable.create"/>
+                <button id="editBtn"
+                        action="workOrdersTable.edit"/>
+                <button id="removeBtn"
+                        action="workOrdersTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

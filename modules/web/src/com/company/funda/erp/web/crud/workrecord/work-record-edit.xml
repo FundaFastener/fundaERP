@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://workRecordEditor"
+        class="com.company.funda.erp.web.crud.workrecord.WorkRecordEdit"
+        datasource="workRecordDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <datasource id="workRecordDs"
+                    class="com.company.funda.erp.entity.WorkRecord"
+                    view="workRecord-with-workOrder-employee"/>
+        <collectionDatasource id="workOrdersDs"
+                              class="com.company.funda.erp.entity.WorkOrder"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from fe$WorkOrder e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="employeesDs"
+                              class="com.company.funda.erp.entity.Employee"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from fe$Employee e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <scrollBox height="100%"
+                   width="600px">
+            <fieldGroup id="fieldGroup"
+                        datasource="workRecordDs">
+                <column width="250px">
+                    <field optionsDatasource="workOrdersDs"
+                           property="workOrder"/>
+                    <field property="recordNo"/>
+                    <field optionsDatasource="employeesDs"
+                           property="employee"/>
+                    <field property="startTime"/>
+                    <field property="endTime"/>
+                    <field property="status"/>
+                    <field property="unit"/>
+                    <field property="unitWeight"/>
+                    <field property="finishedQuantity"/>
+                    <field property="setupLossQuantity"/>
+                    <field property="setupLossUnit"/>
+                    <field property="ngLossQuantity"/>
+                    <field property="ngLossUnit"/>
+                    <field property="materialLossQuantity"/>
+                    <field property="materialLossUnit"/>
+                    <field property="timeUsed"/>
+                    <field property="remark"
+                           rows="5"/>
+                    <field property="workHourType"/>
+                    <field property="operateType"/>
+                </column>
+            </fieldGroup>
+        </scrollBox>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

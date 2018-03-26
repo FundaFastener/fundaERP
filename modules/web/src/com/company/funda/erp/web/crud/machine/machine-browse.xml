@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://machineBrowse"
+        class="com.company.funda.erp.web.crud.machine.MachineBrowse"
+        focusComponent="machinesTable"
+        lookupComponent="machinesTable"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <groupDatasource id="machinesDs"
+                         class="com.company.funda.erp.entity.Machine"
+                         view="machine-department">
+            <query>
+                <![CDATA[select e from fe$Machine e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="machinesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="machinesTable"
+                datasource="machinesDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="machinesTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="no"/>
+                <column id="name"/>
+                <column id="type"/>
+                <column id="processType"/>
+                <column id="brand"/>
+                <column id="department"/>
+                <column id="remark"/>
+            </columns>
+            <rows datasource="machinesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="machinesTable.create"/>
+                <button id="editBtn"
+                        action="machinesTable.edit"/>
+                <button id="removeBtn"
+                        action="machinesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

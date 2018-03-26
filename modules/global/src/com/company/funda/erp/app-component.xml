@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<app-component xmlns="http://schemas.haulmont.com/cuba/app-component.xsd"
+               dependsOn="com.haulmont.cuba">
+    <module blocks="*"
+            name="global">
+        <artifact appJar="true"
+                  name="fe-global"/>
+        <property name="cuba.persistenceConfig"
+                  value="+com/company/funda/erp/persistence.xml"/>
+        <property name="cuba.metadataConfig"
+                  value="+com/company/funda/erp/metadata.xml"/>
+        <property name="cuba.viewsConfig"
+                  value="+com/company/funda/erp/views.xml"/>
+    </module>
+    <module blocks="core"
+            dependsOn="global"
+            name="core">
+        <artifact appJar="true"
+                  name="fe-core"/>
+        <artifact classifier="db"
+                  configuration="dbscripts"
+                  ext="zip"
+                  name="fe-core"/>
+        <property name="cuba.springContextConfig"
+                  value="+com/company/funda/erp/spring.xml"/>
+        <property name="cuba.mainMessagePack"
+                  value="+com.company.funda.erp.core"/>
+    </module>
+    <module blocks="web,desktop"
+            dependsOn="global"
+            name="gui">
+        <artifact appJar="true"
+                  name="fe-gui"/>
+    </module>
+    <module blocks="web"
+            dependsOn="gui"
+            name="web">
+        <artifact appJar="true"
+                  name="fe-web"/>
+        <artifact classifier="web"
+                  configuration="webcontent"
+                  ext="zip"
+                  name="fe-web"/>
+        <artifact configuration="themes"
+                  name="fe-web-themes"/>
+        <property name="cuba.springContextConfig"
+                  value="+com/company/funda/erp/web-spring.xml"/>
+        <property name="cuba.dispatcherSpringContextConfig"
+                  value="+com/company/funda/erp/web-dispatcher-spring.xml"/>
+        <property name="cuba.windowConfig"
+                  value="+com/company/funda/erp/web-screens.xml"/>
+        <property name="cuba.menuConfig"
+                  value="+com/company/funda/erp/web-menu.xml"/>
+        <property name="cuba.permissionConfig"
+                  value="+com/company/funda/erp/web-permissions.xml"/>
+        <property name="cuba.mainMessagePack"
+                  value="+com.company.funda.erp.web com.company.funda.erp.gui"/>
+    </module>
+    <module name="web-themes">
+        <artifact name="fe-web-themes"/>
+    </module>
+</app-component>

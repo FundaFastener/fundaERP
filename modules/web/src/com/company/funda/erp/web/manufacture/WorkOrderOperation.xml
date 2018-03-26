@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://workOrderOperate"
+        class="com.company.funda.erp.web.manufacture.WorkOrderOperation"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <datasource id="workOrderDs"
+                    class="com.company.funda.erp.entity.WorkOrder"
+                    view="workOrder-mostly"/>
+        <datasource id="workRecordDs"
+                    class="com.company.funda.erp.entity.WorkRecord"
+                    view="_local"/>
+        <collectionDatasource id="workRecordsDs"
+                              class="com.company.funda.erp.entity.WorkRecord"
+                              view="_local">
+            <query>
+                <![CDATA[select e from fe$WorkRecord e 
+where e.workOrder.id = :param$workOrder
+order by e.startTime desc]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <scrollBox align="TOP_CENTER"
+                   height="100%"
+                   spacing="true">
+            <hbox width="100%">
+                <label description="mainMsg://workOrderOperate"
+                       value="mainMsg://workOrderOperate"/>
+                <label id="nowTimeLabel"
+                       align="TOP_RIGHT"
+                       value="mainMsg://nowTime"/>
+                <label id="sysTimeLabel"
+                       description="mainMsg://sysTimeLabel">
+                    <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"
+                               format="yyyy-MM-dd HH:mm:ss"/>
+                </label>
+            </hbox>
+            <groupBox>
+                <grid spacing="true"
+                      width="100%">
+                    <columns>
+                        <column flex="0.0"/>
+                        <column flex="0.0"/>
+                        <column flex="0.0"/>
+                    </columns>
+                    <rows>
+                        <row>
+                            <textField id="chargeTF"
+                                       caption="mainMsg://charge"
+                                       editable="false"/>
+                            <textField id="machineTF"
+                                       caption="mainMsg://machine"
+                                       editable="false"/>
+                            <textField id="typeOfMaterialTF"
+                                       caption="mainMsg://typeOfMaterial"
+                                       editable="false"/>
+                        </row>
+                        <row>
+                            <textField id="workOrderTF"
+                                       caption="mainMsg://WorkOrder"
+                                       colspan="2"
+                                       editable="false"
+                                       width="50%"/>
+                            <textField id="predictionWeightTF"
+                                       caption="mainMsg://predictionWeight"
+                                       editable="false"/>
+                        </row>
+                    </rows>
+                </grid>
+            </groupBox>
+            <groupBox id="workOrderRecordStateGB"
+                      caption="mainMsg://WorkOrderRecordState"
+                      stylename="groupBoxBackgroundColor">
+                <grid spacing="true"
+                      width="100%">
+                    <columns count="4"/>
+                    <rows>
+                        <row>
+                            <textField id="stateTF"
+                                       caption="mainMsg://status"
+                                       editable="false"
+                                       rowspan="2"
+                                       stylename="whiteBackground"/>
+                            <textField id="startTimeTF"
+                                       caption="mainMsg://startTime"
+                                       editable="false"
+                                       rowspan="2"
+                                       stylename="whiteBackground"/>
+                            <textField id="periodTF"
+                                       caption="mainMsg://period"
+                                       editable="false"
+                                       rowspan="2"
+                                       stylename="whiteBackground"/>
+                            <textField id="containerNoTF"
+                                       caption="mainMsg://containerNO"
+                                       editable="false"
+                                       rowspan="2"
+                                       stylename="whiteBackground"/>
+                        </row>
+                        <row/>
+                        <row>
+                            <textField id="completedQuantityTF"
+                                       caption="mainMsg://CompletedQuantity"
+                                       editable="false"
+                                       rowspan="2"
+                                       stylename="whiteBackground"/>
+                            <textField id="remainingQuantityTF"
+                                       caption="mainMsg://RemainingQuantity"
+                                       editable="false"
+                                       rowspan="2"
+                                       stylename="whiteBackground"/>
+                            <buttonsPanel id="wooButtonsPanel"
+                                          colspan="2"
+                                          rowspan="2"
+                                          width="100%">
+                                <button id="startTaskBtn"
+                                        caption="mainMsg://startTask"
+                                        disableOnClick="true"
+                                        height="50px"
+                                        invoke="onStartTaskBtnClick"/>
+                                <button id="closeCaseBtn"
+                                        caption="mainMsg://closeCase"
+                                        disableOnClick="true"
+                                        height="50px"
+                                        invoke="onCloseCaseBtnClick"/>
+                            </buttonsPanel>
+                        </row>
+                        <row/>
+                    </rows>
+                </grid>
+            </groupBox>
+            <groupBox id="taskTypeAndStatusGB"
+                      align="TOP_CENTER"
+                      caption="mainMsg://TaskTypeAndStatus"
+                      spacing="true">
+                <grid spacing="true"
+                      width="100%">
+                    <columns>
+                        <column flex="1.0"/>
+                        <column flex="0.2"/>
+                    </columns>
+                    <rows>
+                        <row>
+                            <optionsGroup id="optionsGroup"
+                                          optionsEnum="com.company.funda.erp.enums.WorkRecordStatus"
+                                          orientation="horizontal"
+                                          width="100%"/>
+                            <button id="stopTaskBtn"
+                                    caption="mainMsg://stopTask"
+                                    disableOnClick="true"
+                                    invoke="onStopTaskBtnClick"
+                                    stylename="notablyButtonColor"/>
+                        </row>
+                    </rows>
+                </grid>
+            </groupBox>
+            <groupBox id="manualOperateGB"
+                      align="TOP_CENTER"
+                      caption="msg://ManualOperateWorkRecord"
+                      collapsable="true"
+                      orientation="horizontal"
+                      width="100%">
+                <flowBox spacing="true">
+                    <button id="createBtn"
+                            caption="mainMsg://create"
+                            invoke="createWorkRecord"/>
+                    <button id="editBtn"
+                            caption="mainMsg://edit"
+                            invoke="editWorkRecord"/>
+                    <button id="deleteBtn"
+                            caption="mainMsg://delete"
+                            invoke="deleteWorkRecord"/>
+                </flowBox>
+            </groupBox>
+            <table id="wrTable"
+                   align="TOP_CENTER"
+                   height="250px"
+                   width="100%">
+                <columns>
+                    <column id="startTime">
+                        <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"
+                                   format="yyyy-MM-dd HH:mm:ss"/>
+                    </column>
+                    <column id="endTime">
+                        <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"
+                                   format="yyyy-MM-dd HH:mm:ss"/>
+                    </column>
+                    <column id="recordNo"/>
+                    <column id="status"/>
+                    <column id="unit"
+                            visible="false"/>
+                    <column id="finishedQuantity"/>
+                    <column id="unitWeight"/>
+                    <column id="setupLossQuantity"/>
+                    <column id="setupLossUnit"
+                            visible="false"/>
+                    <column id="materialLossQuantity"/>
+                    <column id="materialLossUnit"
+                            visible="false"/>
+                    <column id="ngLossQuantity"/>
+                    <column id="ngLossUnit"
+                            visible="false"/>
+                    <column id="timeUsed"/>
+                    <column id="remark"/>
+                    <column id="workHourType"/>
+                    <column id="operateType"/>
+                </columns>
+                <rows datasource="workRecordsDs"/>
+                <rowsCount/>
+            </table>
+        </scrollBox>
+    </layout>
+</window>

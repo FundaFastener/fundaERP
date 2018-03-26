@@ -1,0 +1,11 @@
+@import "halo-defaults";
+@import "com.company.funda.erp/halo-ext-defaults";
+@import "app-components";
+@import "com.company.funda.erp/halo-ext";
+
+.halo {
+  // include auto-generated app components SCSS
+  @include app_components;
+  
+  @include com_company_funda_erp-halo-ext;
+}

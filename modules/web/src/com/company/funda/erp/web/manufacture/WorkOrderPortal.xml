@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://workorderprotal"
+        class="com.company.funda.erp.web.manufacture.WorkOrderPortal"
+        messagesPack="com.company.funda.erp.web">
+    <actions>
+        <action id="pickOperator"
+                invoke="pickOperator"/>
+        <action id="scanOperator"
+                invoke="scanOperator"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <buttonsPanel align="TOP_CENTER"
+                      height="285px"
+                      width="542px">
+            <button id="pickOpeBtn"
+                    action="pickOperator"
+                    align="MIDDLE_CENTER"
+                    caption="mainMsg://pickOperator"
+                    height="120px"
+                    width="120px"/>
+            <button id="scanOpBtn"
+                    action="scanOperator"
+                    align="MIDDLE_CENTER"
+                    caption="mainMsg://scanOperator"
+                    height="120px"
+                    width="120px"/>
+            <button id="otherBtn"
+                    align="MIDDLE_CENTER"
+                    caption="mainMsg://doOther"
+                    height="120px"
+                    width="120px"/>
+        </buttonsPanel>
+    </layout>
+</window>

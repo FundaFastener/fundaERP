@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://employeeEditor"
+        class="com.company.funda.erp.web.crud.employee.EmployeeEdit"
+        datasource="employeeDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <datasource id="employeeDs"
+                    class="com.company.funda.erp.entity.Employee"
+                    view="employee-view"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="employeeDs">
+            <column width="250px">
+                <field property="no"/>
+                <field property="firstNameCh"/>
+                <field property="lastNameCh"/>
+                <field property="firstNameEn">
+                    <validator>value ==~ /[\w\s]+/</validator>
+                </field>
+                <field property="lastNameEn">
+                    <validator>value ==~ /[\w\s]+/</validator>
+                </field>
+                <field property="firstNameOther"/>
+                <field property="lastNameOther"/>
+                <field property="department"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://workRecordBrowse"
+        class="com.company.funda.erp.web.crud.workrecord.WorkRecordBrowse"
+        focusComponent="workRecordsTable"
+        lookupComponent="workRecordsTable"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <groupDatasource id="workRecordsDs"
+                         class="com.company.funda.erp.entity.WorkRecord"
+                         view="_local">
+            <query>
+                <![CDATA[select e from fe$WorkRecord e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="workRecordsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="workRecordsTable"
+                datasource="workRecordsDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="workRecordsTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="recordNo"/>
+                <column id="startTime"/>
+                <column id="endTime"/>
+                <column id="status"/>
+                <column id="unit"/>
+                <column id="unitWeight"/>
+                <column id="finishedQuantity"/>
+                <column id="setupLossQuantity"/>
+                <column id="setupLossUnit"/>
+                <column id="ngLossQuantity"/>
+                <column id="ngLossUnit"/>
+                <column id="materialLossQuantity"/>
+                <column id="materialLossUnit"/>
+                <column id="remark"/>
+                <column id="workHourType"/>
+                <column id="operateType"/>
+            </columns>
+            <rows datasource="workRecordsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="workRecordsTable.create"/>
+                <button id="editBtn"
+                        action="workRecordsTable.edit"/>
+                <button id="removeBtn"
+                        action="workRecordsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

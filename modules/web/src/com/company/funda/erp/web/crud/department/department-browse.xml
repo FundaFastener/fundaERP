@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://departmentBrowse"
+        class="com.company.funda.erp.web.crud.department.DepartmentBrowse"
+        focusComponent="departmentsTable"
+        lookupComponent="departmentsTable"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <groupDatasource id="departmentsDs"
+                         class="com.company.funda.erp.entity.Department"
+                         view="department-with-manager">
+            <query>
+                <![CDATA[select e from fe$Department e]]>
+            </query>
+        </groupDatasource>
+        <groupDatasource id="employeesDs"
+                         class="com.company.funda.erp.entity.Employee"
+                         view="_local">
+            <query>
+                <![CDATA[select e from fe$Employee e
+where e.department.id = :ds$departmentsDs
+order by e.firstNameEn]]>
+            </query>
+        </groupDatasource>
+        <groupDatasource id="machinesDs"
+                         class="com.company.funda.erp.entity.Machine"
+                         view="_local">
+            <query>
+                <![CDATA[select e from fe$Machine e
+where e.department.id = :ds$departmentsDs
+order by e.name]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <scrollBox height="100%"
+                   spacing="true">
+            <filter id="filter"
+                    applyTo="departmentsTable"
+                    datasource="departmentsDs">
+                <properties include=".*"/>
+            </filter>
+            <groupTable id="departmentsTable"
+                        height="200px"
+                        width="100%">
+                <actions>
+                    <action id="create"/>
+                    <action id="edit"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="no"/>
+                    <column id="name"/>
+                    <column id="managedBy"/>
+                </columns>
+                <rows datasource="departmentsDs"/>
+                <rowsCount/>
+                <buttonsPanel id="buttonsPanel"
+                              alwaysVisible="true">
+                    <button id="createBtn"
+                            action="departmentsTable.create"/>
+                    <button id="editBtn"
+                            action="departmentsTable.edit"/>
+                    <button id="removeBtn"
+                            action="departmentsTable.remove"/>
+                </buttonsPanel>
+            </groupTable>
+            <table id="employeesTable"
+                   caption="msg://employee.list"
+                   height="200px"
+                   width="100%">
+                <columns>
+                    <column id="no"/>
+                    <column id="firstNameCh"/>
+                    <column id="lastNameCh"/>
+                    <column id="firstNameEn"/>
+                    <column id="lastNameEn"/>
+                    <column id="firstNameOther"/>
+                    <column id="lastNameOther"/>
+                </columns>
+                <rows datasource="employeesDs"/>
+            </table>
+            <table id="machinesTable"
+                   caption="msg://machine.list"
+                   height="200px"
+                   width="100%">
+                <columns>
+                    <column id="no"/>
+                    <column id="name"/>
+                    <column id="type"/>
+                    <column id="processType"/>
+                    <column id="brand"/>
+                    <column id="remark"/>
+                </columns>
+                <rows datasource="machinesDs"/>
+            </table>
+        </scrollBox>
+    </layout>
+</window>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             version="2.0">
+    <persistence-unit name="fundaERP"
+                      transaction-type="RESOURCE_LOCAL">
+        <class>com.company.funda.erp.entity.Company</class>
+        <class>com.company.funda.erp.entity.Department</class>
+        <class>com.company.funda.erp.entity.Employee</class>
+        <class>com.company.funda.erp.entity.InventoryItem</class>
+        <class>com.company.funda.erp.entity.Machine</class>
+        <class>com.company.funda.erp.entity.WorkOrder</class>
+        <class>com.company.funda.erp.entity.WorkRecord</class>
+    </persistence-unit>
+</persistence>
