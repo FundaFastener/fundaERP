@@ -43,4 +43,6 @@
             template="com/company/funda/erp/web/manufacture/WorkRecordManualEnd.xml"/>
     <screen id="AskUnfinishedWorkRecord"
             template="com/company/funda/erp/web/manufacture/AskUnfinishedWorkRecord.xml"/>
+    <screen id="TestPage"
+            template="com/company/funda/erp/test/TestPage.xml"/>
 </screen-config>

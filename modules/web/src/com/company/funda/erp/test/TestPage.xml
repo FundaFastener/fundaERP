@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://caption"
+        class="com.company.funda.erp.test.Testpage"
+        messagesPack="com.company.funda.erp.test">
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <flowBox height="264px"
+                 spacing="true"
+                 width="351px">
+            <label id="label"/>
+            <buttonsPanel>
+                <button invoke="sayHellow"/>
+            </buttonsPanel>
+            <button/>
+        </flowBox>
+    </layout>
+</window>
