@@ -13,6 +13,7 @@
         <item screen="WorkRecordManualEnd"/>
         <item screen="AskUnfinishedWorkRecord"/>
         <item screen="TestPage"/>
+
     </menu>
     <menu id="ManufacturingControlSystem"
           insertBefore="administration">
