@@ -517,17 +517,17 @@ public class WorkOrderOperation extends AbstractWindow  {
 		public void workHourTimeOut(LocalDateTime localDateTime) {
 			if(null != getWorkHour()) {
 				if(getCountDown()>0) {
-					logger.info("count down:{}",getCountDown());
+//					logger.info("count down:{}",getCountDown());
 					countOneTimes();
 				}else if(getCountDown()==0) {
-					logger.info("count down ==0 ");
+//					logger.info("count down ==0 ");
 					final LocalTime localTime = localDateTime.toLocalTime();
 					if(localTime.isAfter(getWorkHour().getTo())) {
-						logger.info("localTime is afger deadline:{}",localTime.isAfter(getWorkHour().getTo()));
+//						logger.info("localTime is afger deadline:{}",localTime.isAfter(getWorkHour().getTo()));
 						getContext().getParams().put("manualEndTime",FundaDateUtil.timeToTodayDateTime(localTime));
 						onStopTaskBtnClick();
 					}else {
-						logger.info("localTime is afger deadline:{}",localTime.isAfter(getWorkHour().getTo()));
+//						logger.info("localTime is afger deadline:{}",localTime.isAfter(getWorkHour().getTo()));
 						initCountDown(localDateTime);
 					}
 					
