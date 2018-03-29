@@ -248,12 +248,14 @@ task wrapper(type: Wrapper) {
 apply from: 'extra.gradle'
 
 task buildUatWar(type: CubaWarBuilding) {
+	appName = 'feUat'
     coreContextXmlPath = 'modules/core/web/META-INF/war-uat-context.xml'
-    appProperties = ['cuba.automaticDatabaseUpdate' : true]
+    appProperties = ['cuba.automaticDatabaseUpdate' : true,
+    'cuba.connectionUrlList' : 'http://localhost:18088/feUat-core']
     singleWar = false
     includeContextXml = true
     includeJdbcDriver = true
-    appHome = '${app.home}'
+    appHome = '${app.uat.home}'
 }
 
 task buildProdWar(type: CubaWarBuilding) {
@@ -263,5 +265,5 @@ task buildProdWar(type: CubaWarBuilding) {
     singleWar = false
     includeContextXml = true
     includeJdbcDriver = true
-    appHome = '${app.home}'
+    appHome = '${app.prod.home}'
 }
