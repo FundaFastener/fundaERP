@@ -9,9 +9,6 @@
         <item screen="fe$Machine.browse"/>
         <item screen="fe$WorkOrder.browse"/>
         <item screen="fe$WorkRecord.browse"/>
-        <item screen="WorkRecordInput"/>
-        <item screen="WorkRecordManualEnd"/>
-        <item screen="AskUnfinishedWorkRecord"/>
     </menu>
     <menu id="ManufacturingControlSystem"
           insertBefore="administration">
