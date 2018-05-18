@@ -1,5 +1,14 @@
 package com.company.funda.erp.core;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
+import org.junit.Test;
+
 import com.company.funda.erp.FeTestContainer;
 import com.haulmont.cuba.core.EntityManager;
 import com.haulmont.cuba.core.Persistence;
@@ -9,14 +18,6 @@ import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.security.entity.User;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Test;
-
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 public class SampleIntegrationTest {
 
@@ -27,14 +28,14 @@ public class SampleIntegrationTest {
     private Persistence persistence;
     private DataManager dataManager;
 
-    @Before
+    @BeforeClass
     public void setUp() throws Exception {
         metadata = cont.metadata();
         persistence = cont.persistence();
         dataManager = AppBeans.get(DataManager.class);
     }
 
-    @After
+    @AfterClass
     public void tearDown() throws Exception {
     }
 
