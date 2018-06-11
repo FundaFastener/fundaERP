@@ -268,5 +268,5 @@ task buildProdWar(type: CubaWarBuilding) {
     singleWar = false
     includeContextXml = true
     includeJdbcDriver = true
-    appHome = '${app.home}'
+    appHome = '${app.prod.home}'
 }
