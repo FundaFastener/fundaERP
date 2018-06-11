@@ -12,7 +12,6 @@
     <context-param>
         <param-name>appPropertiesConfig</param-name>
         <param-value>classpath:com/company/funda/erp/web-app.properties
-        			 classpath:com/company/funda/erp/funda-app.properties
             /WEB-INF/local.app.properties
             "file:${catalina.base}/conf/fe/local.app.properties"</param-value>
     </context-param>

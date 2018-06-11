@@ -14,4 +14,8 @@
           insertBefore="administration">
         <item screen="WorkOrderPortal"/>
     </menu>
+    <menu id="importDB"
+          insertBefore="administration">
+        <item screen="AskPreLoad"/>
+    </menu>
 </menu-config>

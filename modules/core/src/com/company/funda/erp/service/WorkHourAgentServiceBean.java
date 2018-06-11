@@ -35,6 +35,7 @@ public class WorkHourAgentServiceBean implements WorkHourAgentService {
 
 	@Override
 	public Shift getShift(Employee employee) {
+		//Should be a someone's specific shift return.But now is fake.
 		return regularShift;
 	}
 	

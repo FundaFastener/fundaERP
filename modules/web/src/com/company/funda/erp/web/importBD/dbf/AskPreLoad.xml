@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://import"
+        class="com.company.funda.erp.web.importBD.dbf.Askpreload"
+        messagesPack="com.company.funda.erp.web.importBD.dbf">
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <groupBox height="196px"
+                  spacing="true">
+            <flowBox spacing="true">
+                <button caption="mainMsg://importMachine"
+                        invoke="toImportMachine"/>
+                <button caption="mainMsg://importInventoryItem"
+                        invoke="toImportInventoryItem"/>
+                <button caption="mainMsg://importWorkOrder"
+                        invoke="toImportWorkOrder"/>
+            </flowBox>
+        </groupBox>
+    </layout>
+</window>

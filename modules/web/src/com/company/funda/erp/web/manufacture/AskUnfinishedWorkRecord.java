@@ -5,8 +5,6 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.company.funda.erp.entity.WorkOrder;
 import com.company.funda.erp.entity.WorkRecord;
@@ -33,7 +31,6 @@ public class AskUnfinishedWorkRecord extends AbstractWindow {
 	private Datasource<WorkOrder> workOrderDs;
 	@Inject 
 	private Datasource<WorkRecord> workRecordDs;
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public void proceed(Component source) {
 		close(PROCEED);

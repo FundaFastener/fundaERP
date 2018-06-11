@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://importMachine"
+        class="com.company.funda.erp.web.importBD.dbf.LoadMachine"
+        messagesPack="com.company.funda.erp.web.importBD.dbf">
+    <dsContext>
+        <collectionDatasource id="machinesDs"
+                              allowCommit="false"
+                              class="com.company.funda.erp.entity.Machine"
+                              datasourceClass="com.company.funda.erp.web.datasource.DbfMachineDatasource"
+                              view="_base"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <scrollBox height="100%"
+                   margin="true">
+            <groupBox spacing="true">
+                <vbox spacing="true">
+                    <flowBox spacing="true">
+                        <textField id="no"
+                                   caption="mainMsg://InventoryItemNo"/>
+                        <button id="queryBtn"
+                                caption="mainMsg://query"
+                                invoke="query"/>
+                        <button id="selectAll"
+                                caption="mainMsg://selectAll"
+                                invoke="selectAll"/>
+                    </flowBox>
+                    <flowBox spacing="true">
+                        <lookupField id="lookupField"
+                                     caption="mainMsg://whenNoDuplicate"
+                                     nullOptionVisible="false"
+                                     optionsEnum="com.company.funda.erp.enums.DbfImportType"/>
+                        <button id="importBtn"
+                                caption="mainMsg://executeImport"
+                                invoke="onImportBtnClick"/>
+                    </flowBox>
+                </vbox>
+            </groupBox>
+            <table id="machinesTable"
+                   height="400px"
+                   multiselect="true"
+                   width="100%">
+                <actions>
+                    <action id="remove"
+                            caption="mainMsg://remove"/>
+                </actions>
+                <columns>
+                    <column id="no"/>
+                    <column id="name"/>
+                    <column id="type"/>
+                    <column id="processType"/>
+                    <column id="brand"/>
+                    <column id="remark"/>
+                </columns>
+                <rows datasource="machinesDs"/>
+                <rowsCount/>
+            </table>
+        </scrollBox>
+    </layout>
+</window>

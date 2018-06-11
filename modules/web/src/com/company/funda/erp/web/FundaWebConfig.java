@@ -6,7 +6,7 @@ import com.haulmont.cuba.core.config.Source;
 import com.haulmont.cuba.core.config.SourceType;
 
 @Source(type = SourceType.APP)
-public interface FundaConfig extends Config {
+public interface FundaWebConfig extends Config {
 
 	@Property("funda.clock.refresh.delay")
     int getFundaClockRefreshDelay();

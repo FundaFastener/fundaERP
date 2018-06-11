@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -24,9 +23,8 @@ import com.company.funda.erp.enums.OperateType;
 import com.company.funda.erp.enums.WorkOrderUnit;
 import com.company.funda.erp.service.WorkHourAgentService;
 import com.company.funda.erp.service.WorkRecordService;
-import com.company.funda.erp.util.EnumUtil;
 import com.company.funda.erp.util.FundaDateUtil;
-import com.company.funda.erp.web.FundaConfig;
+import com.company.funda.erp.web.FundaWebConfig;
 import com.company.funda.erp.web.validate.BiggerThenZeroValidator;
 import com.haulmont.chile.core.datatypes.Datatypes;
 import com.haulmont.cuba.core.global.Messages;
@@ -94,7 +92,7 @@ public class WorkRecordInput extends AbstractWindow {
 	@Inject
 	private Table<WorkRecord> workRecordsTable;
 	@Inject
-	private FundaConfig fundaConfig;
+	private FundaWebConfig fundaConfig;
 	
 	private Date endTime;
 
@@ -123,8 +121,10 @@ public class WorkRecordInput extends AbstractWindow {
 		//取合格的資料(AUTO and MANUAL)
 		allCorrectedWorkRecords = workRecordService.getLatestDaysCorrectedRecords((WorkOrder)params.get("workOrder"), "");
 		List<WorkRecord> allWorkRecords = workRecordService.getLatestDaysRecords((WorkOrder)params.get("workOrder"), "");
-		if(!workRecordService.isAllHaveEndTime(allWorkRecords)) {
-			showNotification("Check all endTime is inputed , or you can not use finishedQuantityAll field.");
+
+		if(!allWorkRecords.isEmpty() && !workRecordService.isAllHaveEndTime(allWorkRecords)) {
+			
+			showNotification(messages.getMainMessage("check.all.endTime.is.inputed"),NotificationType.WARNING);
 			finishedQuantityAll.setEnabled(false);
 		}
 	}
@@ -206,8 +206,10 @@ public class WorkRecordInput extends AbstractWindow {
         			accumulateQuantity = accumulateQuantity.subtract(workRecord_.getFinishedQuantity());
         		}
         		if(realTimeQuentity.compareTo(accumulateQuantity)<0) {
-        			//TODO-H message should not hard code.
-        			showMessageDialog("ERROR", "FinishedQuantityAll can't less then "+nowUnit.toSelf(accumulateQuantity), MessageType.WARNING);
+
+        			showMessageDialog(messages.getMainMessage("error"), 
+        					messages.formatMainMessage("finishedQuantityAll.cannot.less.then", nowUnit.toSelf(accumulateQuantity)), 
+        					MessageType.WARNING);
         			finishedQuantityAll.setValue(null);
         			return;
         		}
@@ -240,7 +242,6 @@ public class WorkRecordInput extends AbstractWindow {
     	    		close(COMMIT_ACTION_ID,true);   
     			} catch (Exception e) {
     				showNotification(e.getMessage());
-    				logger.info("::{}",e.getMessage());
     			}
     		}
     		
@@ -257,13 +258,13 @@ public class WorkRecordInput extends AbstractWindow {
 			
 		});
 		if(needList) {
-			sb.append("workRecord startTime-endTime list:\n");
+			sb.append(messages.getMainMessage("workRecord.startTime.endTime.list"));
 			allCorrectedWorkRecords.forEach(wr->{
 				sb.append(format(wr.getStartTime())).append(" - ").append(format(wr.getEndTime()));
 				sb.append("\n");
 			});
 		}
-		showOptionDialog("error", sb.toString(), MessageType.CONFIRMATION, 
+		showOptionDialog(messages.getMainMessage("error"), sb.toString(), MessageType.CONFIRMATION, 
 		new Action[] {
 		        new DialogAction(DialogAction.Type.OK, Status.PRIMARY)
 		    }
@@ -286,7 +287,7 @@ public class WorkRecordInput extends AbstractWindow {
 			if(correctedWorkRecords.size()>0) {
 				final WorkRecord latestWorkRecord = correctedWorkRecords.get(0);
 				if(!errorMsg.isEmpty() || startTimeField.getValue().before(latestWorkRecord.getEndTime())) {
-					errorMsg.add("Input finishedQuantityAll need fixed all error above,and startTime and endTime must be latest!");
+					errorMsg.add(messages.getMainMessage("input.finishedquantityall.need.fixed.all.error"));					
 					needList = true;
 				}
 			}
@@ -308,7 +309,8 @@ public class WorkRecordInput extends AbstractWindow {
 		if(getAllCorrectedWorkRecords().size()>0 && !workRecordService.inSameSection(getAllCorrectedWorkRecords(), 
 				startTimeField.getValue(), 
 				endTimeField.getValue())) {
-			errorMsg.add(startTimeField.getCaption()+","+endTimeField.getCaption()+" : must in same section!");	
+			
+			errorMsg.add(messages.formatMainMessage("must.in.same.section", startTimeField.getCaption(),endTimeField.getCaption()));	
 			needList = true;
 		}
 		return needList;
@@ -317,11 +319,13 @@ public class WorkRecordInput extends AbstractWindow {
 	private boolean checkInRecordSection(ArrayList<String> errorMsg) {
 		boolean needList = false;
 		if(workRecordService.isInRecordSection(getAllCorrectedWorkRecords(), (Date) startTimeField.getValue())) {
-			errorMsg.add(startTimeField.getCaption()+" : Can't interrupt other record!");
+			
+			errorMsg.add(messages.formatMainMessage("cannot.interrupt.other.record", startTimeField.getCaption()));
 			needList = true;
 		}
 		if(workRecordService.isInRecordSection(getAllCorrectedWorkRecords(), (Date) endTimeField.getValue())) {
-			errorMsg.add(endTimeField.getCaption()+" : Can't interrupt other record!");
+			
+			errorMsg.add(messages.formatMainMessage("cannot.interrupt.other.record", endTimeField.getCaption()));
 			needList = true;
 		}
 		return needList;
@@ -331,7 +335,6 @@ public class WorkRecordInput extends AbstractWindow {
 	private void checkPeriodReasonable(ArrayList<String> errorMsg) {
 		if(!lessThenZeroValidator.isBiggerThenZero(timeUsed.getValue())) {
 			errorMsg.add(lessThenZeroValidator.getMessage(timeUsed.getCaption()));
-			timeUsed.setValue("");
 		}
 	}
 
@@ -340,10 +343,10 @@ public class WorkRecordInput extends AbstractWindow {
 		Date fromDate = DateUtils.addDays(nowDate,-fundaConfig.getWorkRecordFromDaysBefore());
 		fromDate = DateUtils.round(fromDate, Calendar.DATE);
 		if(!FundaDateUtil.isBetweenNarrowly(startTimeField.getValue(), fromDate, nowDate)) {
-			errorMsg.add(startTimeField.getCaption()+" : Please input "+fundaConfig.getWorkRecordFromDaysBefore()+" days till now!");
+			errorMsg.add(messages.formatMainMessage("please.input.n.days.till.now", startTimeField.getCaption(),fundaConfig.getWorkRecordFromDaysBefore()));
 		}
 		if(!FundaDateUtil.isBetweenNarrowly(endTimeField.getValue(), fromDate, nowDate)) {
-			errorMsg.add(endTimeField.getCaption()+" : Please input "+fundaConfig.getWorkRecordFromDaysBefore()+" days till now!");
+			errorMsg.add(messages.formatMainMessage("please.input.n.days.till.now", endTimeField.getCaption(),fundaConfig.getWorkRecordFromDaysBefore()));
 		}
 	}
     private String format(Date date) {
@@ -421,7 +424,7 @@ public class WorkRecordInput extends AbstractWindow {
     	final Integer main = workRecordDs.getItem().getTimeUsed();
     	logger.info("input,sum,main,result :{},{},{},{}",inputTimeused,sum,main,(sum + inputTimeused <= main));
     	if(!(sum + inputTimeused <= main)) {
-    		showNotification("Can't make the sum of time used bigger then main work record time used.");
+    		showNotification(messages.getMainMessage("cannot.make.time.used.bigger.then.main"));
     	}
     	return (sum + inputTimeused <= main);
     }

@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.7.12'
+    ext.cubaVersion = '6.7.13'
     repositories {
         
         maven {
@@ -73,6 +73,7 @@ configure(globalModule) {
 
     dependencies {
         compile('org.apache.commons:commons-lang3:3.1')
+        compile('org.jamel.dbf:dbf-reader:0.0.3')
     }
     task enhance(type: CubaEnhancing)
 
@@ -155,7 +156,7 @@ configure(webModule) {
     dependencies {
         provided(servletApi)
         compile(guiModule)
-
+		testRuntime(postgres)
     }
     
     task webArchive(type: Zip) {
@@ -251,7 +252,8 @@ task buildUatWar(type: CubaWarBuilding) {
 	appName = 'feUat'
     coreContextXmlPath = 'modules/core/web/META-INF/war-uat-context.xml'
     appProperties = ['cuba.automaticDatabaseUpdate' : true,
-    'cuba.connectionUrlList' : 'http://localhost:8080/feUat-core']
+    'cuba.connectionUrlList' : 'http://localhost:8080/feUat-core',
+    'dbf.partition' : '${uat.dbf.home}']
     singleWar = false
     includeContextXml = true
     includeJdbcDriver = true
@@ -261,7 +263,8 @@ task buildUatWar(type: CubaWarBuilding) {
 task buildProdWar(type: CubaWarBuilding) {
     coreContextXmlPath = 'modules/core/web/META-INF/war-prod-context.xml'
     appProperties = ['cuba.automaticDatabaseUpdate' : true,
-	'cuba.connectionUrlList': 'http://localhost:8921/fe-core']
+	'cuba.connectionUrlList': 'http://localhost:8921/fe-core',
+    'dbf.partition' : '${dbf.home}']
     singleWar = false
     includeContextXml = true
     includeJdbcDriver = true

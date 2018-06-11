@@ -67,8 +67,8 @@ public class WorkRecordManualEnd extends AbstractWindow {
 	    		}
 	    	}); 		
     	}else {
-    		//TODO-H Don't hard code here.
-    		showNotification("Please input correct end time!", NotificationType.WARNING);
+    		
+    		showNotification(messages.getMainMessage("please.input.correct.end.time"), NotificationType.WARNING);
     	}
     }
 
