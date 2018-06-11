@@ -1,8 +1,6 @@
 package com.company.funda.erp.service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import javax.inject.Inject;
 
@@ -23,11 +21,9 @@ public class WorkHourAgentServiceBean implements WorkHourAgentService {
 	@Override
 	public boolean isOnJob(Employee employee,LocalDateTime thisTime) {
 		boolean result = false;
-		final LocalDate nowDate = thisTime.toLocalDate();
-		final LocalTime nowTime = thisTime.toLocalTime();
-		final WorkDay todayWork = regularShift.getWorkDayBy(employee,nowDate);
-		if(todayWork.isWorkingDay()) {
-			result = regularShift.isWorkHour(todayWork.getWorkHours(),nowTime);
+		final WorkDay todayWork = regularShift.getWorkDayBy(employee,thisTime.toLocalDate());
+		if(regularShift.isWorkingDay(todayWork)) {
+			result = regularShift.isWorkHour(todayWork.getWorkHours(),thisTime.toLocalTime());
 		}
 		return result;
 	}
@@ -39,17 +35,16 @@ public class WorkHourAgentServiceBean implements WorkHourAgentService {
 
 	@Override
 	public Shift getShift(Employee employee) {
+		//Should be a someone's specific shift return.But now is fake.
 		return regularShift;
 	}
 	
 	@Override
 	public WorkHour getNowWorkHour(Employee employee, LocalDateTime now) {
 		WorkHour result = null;
-		final LocalDate nowDate = now.toLocalDate();
-		final WorkDay todayWork = regularShift.getWorkDayBy(employee,nowDate);
+		final WorkDay todayWork = regularShift.getWorkDayBy(employee,now.toLocalDate());
 		if(todayWork.isWorkingDay()) {
-			final LocalTime nowTime = now.toLocalTime();
-			return regularShift.getWorkHour(todayWork.getWorkHours(), nowTime);
+			result = regularShift.getWorkHour(todayWork.getWorkHours(), now.toLocalTime());
 		}
 		return result;
 	}

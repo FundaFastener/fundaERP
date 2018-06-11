@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://importWorkOrder"
+        class="com.company.funda.erp.web.importBD.dbf.LoadWorkorder"
+        messagesPack="com.company.funda.erp.web.importBD.dbf">
+    <dsContext>
+        <collectionDatasource id="workOrdersDs"
+                              allowCommit="false"
+                              class="com.company.funda.erp.entity.WorkOrder"
+                              datasourceClass="com.company.funda.erp.web.datasource.DbfWorkOrderDatasource"
+                              view="_base">
+            <query>
+                <![CDATA[select e from fe$WorkOrder e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <scrollBox height="100%"
+                   margin="true">
+            <groupBox spacing="true">
+                <vbox spacing="true">
+                    <flowBox spacing="true">
+                        <dateField id="dfFrom"
+                                   caption="mainMsg://startTime"
+                                   resolution="DAY"/>
+                        <dateField id="dfTo"
+                                   caption="mainMsg://endTime"
+                                   resolution="DAY"/>
+                        <textField id="no"
+                                   caption="mainMsg://InventoryItemNo"/>
+                        <button id="queryBtn"
+                                caption="mainMsg://query"
+                                invoke="query"/>
+                        <button id="selectAll"
+                                caption="mainMsg://selectAll"
+                                invoke="selectAll"/>
+                    </flowBox>
+                    <flowBox spacing="true">
+                        <lookupField id="lookupField"
+                                     caption="mainMsg://whenNoDuplicate"
+                                     nullOptionVisible="false"
+                                     optionsEnum="com.company.funda.erp.enums.DbfImportType"/>
+                        <button id="importBtn"
+                                caption="mainMsg://executeImport"
+                                invoke="onImportBtnClick"/>
+                    </flowBox>
+                </vbox>
+            </groupBox>
+            <table id="workOrdersTable"
+                   height="500px"
+                   multiselect="true"
+                   width="100%">
+                <actions>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="no"/>
+                    <column id="quantity"/>
+                    <column id="status"/>
+                    <column id="unit"/>
+                    <column id="processType"/>
+                    <column id="remark"/>
+                </columns>
+                <rows datasource="workOrdersDs"/>
+                <rowsCount/>
+            </table>
+        </scrollBox>
+    </layout>
+</window>

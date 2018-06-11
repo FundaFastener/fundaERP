@@ -14,6 +14,8 @@
                        value="com.company.funda.erp.service.WorkRecordService"/>
                 <entry key="fe_WorkHourAgentService"
                        value="com.company.funda.erp.service.WorkHourAgentService"/>
+                <entry key="fe_ImportDBFService"
+                       value="com.company.funda.erp.service.ImportDBFService"/>
             </map>
         </property>
     </bean>

@@ -19,6 +19,6 @@ public class EnumUtil {
 		System.out.println(EnumUtil.equalIn(OperateType.AUTO, OperateType.DETACH,OperateType.INTERIM,OperateType.MANUAL));
 		System.out.println(EnumUtil.equalIn(OperateType.AUTO, OperateType.DETACH));
 		System.out.println(EnumUtil.equalIn(OperateType.AUTO, OperateType.DETACH,OperateType.INTERIM,OperateType.AUTO,OperateType.MANUAL));
-		System.out.println(EnumUtil.equalIn(OperateType.AUTO, OperateType.AUTO,OperateType.MANUAL));
+		System.out.println(EnumUtil.equalIn(OperateType.DETACH, OperateType.MANUAL,OperateType.INTERIM));
 	}
 }

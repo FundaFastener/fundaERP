@@ -7,12 +7,21 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.chrono.ChronoLocalDate;
+import java.time.chrono.Chronology;
+import java.time.chrono.MinguoChronology;
+import java.time.chrono.MinguoDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DecimalStyle;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -106,7 +115,17 @@ public class FundaDateUtil {
 	}
 	
 	public static LocalDateTime localDateTimeFromDate(Date date) {
-		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+//		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+		return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+	}
+	
+	public static Date dateFromLocalDate(LocalDate localDate) {
+		return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+	}
+	
+	public static LocalDate localDateFromDate(Date date) {
+		return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
 	}
 	
 	
@@ -187,11 +206,16 @@ public class FundaDateUtil {
 	
 	public static void main(String ...strings) {
 		
-		final Date nowDate = new Date();
-		Date anotherDate = DateUtils.addDays(nowDate,-7);
-		anotherDate = DateUtils.round(anotherDate, Calendar.DATE);
-		System.out.println(format(nowDate, Type.DAY_TIME));
-		System.out.println(format(anotherDate, Type.DAY_TIME));
+		
+		System.out.println(StringUtils.containsIgnoreCase("abc", "a"));
+		System.out.println(StringUtils.containsIgnoreCase("abc", "aa"));
+		System.out.println(StringUtils.containsIgnoreCase("abc", "A"));
+		System.out.println(StringUtils.containsIgnoreCase("abc", "AA"));
+//		final Date nowDate = new Date();
+//		Date anotherDate = DateUtils.addDays(nowDate,-7);
+//		anotherDate = DateUtils.round(anotherDate, Calendar.DATE);
+//		System.out.println(format(nowDate, Type.DAY_TIME));
+//		System.out.println(format(anotherDate, Type.DAY_TIME));
 		
 //		LocalDateTime ldt1 = LocalDateTime.of(2018, 3, 1, 8, 0);
 //		LocalDateTime ldt2 = LocalDateTime.of(2018, 3, 1, 12, 0);

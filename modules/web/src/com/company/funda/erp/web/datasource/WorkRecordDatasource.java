@@ -11,11 +11,11 @@ import com.haulmont.cuba.gui.data.impl.CustomCollectionDatasource;
 
 public class WorkRecordDatasource extends CustomCollectionDatasource<WorkRecord, UUID> {
 
-	private List<WorkRecord> peopleList = new ArrayList<>();
+	private List<WorkRecord> customList = new ArrayList<>();
 	
 	@Override
 	protected Collection<WorkRecord> getEntities(Map<String, Object> params) {
-		return peopleList;
+		return customList;
 	}
 
 }

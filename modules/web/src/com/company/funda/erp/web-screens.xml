@@ -43,4 +43,12 @@
             template="com/company/funda/erp/web/manufacture/WorkRecordManualEnd.xml"/>
     <screen id="AskUnfinishedWorkRecord"
             template="com/company/funda/erp/web/manufacture/AskUnfinishedWorkRecord.xml"/>
+    <screen id="AskPreLoad"
+            template="com/company/funda/erp/web/importBD/dbf/AskPreLoad.xml"/>
+    <screen id="LoadMachine"
+            template="com/company/funda/erp/web/importBD/dbf/LoadMachine.xml"/>
+    <screen id="LoadInventoryItem"
+            template="com/company/funda/erp/web/importBD/dbf/LoadInventoryItem.xml"/>
+    <screen id="LoadWorkOrder"
+            template="com/company/funda/erp/web/importBD/dbf/LoadWorkOrder.xml"/>
 </screen-config>

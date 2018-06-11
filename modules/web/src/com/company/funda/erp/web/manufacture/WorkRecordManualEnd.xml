@@ -41,7 +41,7 @@
             <hbox spacing="true">
                 <dateField id="manualEndTime"
                            required="true"
-                           resolution="SEC"/>
+                           resolution="MIN"/>
             </hbox>
             <buttonsPanel align="TOP_CENTER">
                 <button action="confirm"/>

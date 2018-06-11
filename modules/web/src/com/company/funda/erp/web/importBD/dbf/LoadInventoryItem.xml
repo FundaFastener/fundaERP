@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://importInventoryItem"
+        class="com.company.funda.erp.web.importBD.dbf.LoadInventoryItem"
+        messagesPack="com.company.funda.erp.web.importBD.dbf">
+    <dsContext>
+        <collectionDatasource id="inventoryItemsDs"
+                              allowCommit="false"
+                              class="com.company.funda.erp.entity.InventoryItem"
+                              datasourceClass="com.company.funda.erp.web.datasource.DbfInventoryItemDatasource"
+                              view="_base"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <scrollBox height="100%"
+                   margin="true">
+            <groupBox spacing="true">
+                <vbox spacing="true">
+                    <flowBox spacing="true">
+                        <dateField id="dfFrom"
+                                   caption="mainMsg://startTime"
+                                   resolution="DAY"/>
+                        <dateField id="dfTo"
+                                   caption="mainMsg://endTime"
+                                   resolution="DAY"/>
+                        <textField id="no"
+                                   caption="mainMsg://InventoryItemNo"/>
+                        <button id="queryBtn"
+                                caption="mainMsg://query"
+                                invoke="query"/>
+                        <button id="selectAll"
+                                caption="mainMsg://selectAll"
+                                invoke="selectAll"/>
+                    </flowBox>
+                    <flowBox spacing="true">
+                        <lookupField id="lookupField"
+                                     caption="mainMsg://whenNoDuplicate"
+                                     nullOptionVisible="false"
+                                     optionsEnum="com.company.funda.erp.enums.DbfImportType"/>
+                        <button id="importBtn"
+                                caption="mainMsg://executeImport"
+                                invoke="onImportBtnClick"/>
+                    </flowBox>
+                </vbox>
+            </groupBox>
+            <table id="inventoryItemTable"
+                   height="500px"
+                   multiselect="true"
+                   width="100%">
+                <actions>
+                    <action id="remove"
+                            caption="mainMsg://remove"/>
+                </actions>
+                <columns>
+                    <column id="no"/>
+                    <column id="name1"/>
+                    <column id="name2"/>
+                    <column id="category"/>
+                    <column id="materialWeight"/>
+                    <column id="netWeight"/>
+                </columns>
+                <rows datasource="inventoryItemsDs"/>
+                <rowsCount/>
+            </table>
+        </scrollBox>
+    </layout>
+</window>

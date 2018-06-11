@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,14 +31,14 @@ public class WorkRecordServiceBeanTest {
 	@ClassRule
 	public static FeTestContainer cont = FeTestContainer.Common.INSTANCE;
 
-	private WorkRecordService WorkRecordService;
-	private Metadata metadata;
-	private Persistence persistence;
-	private DataManager dataManager;
+	private static WorkRecordService WorkRecordService;
+	private static Metadata metadata;
+	private static Persistence persistence;
+	private static DataManager dataManager;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public static void setUp() throws Exception {
 		metadata = cont.metadata();
 		persistence = cont.persistence();
 		dataManager = AppBeans.get(DataManager.class);
@@ -82,6 +82,7 @@ public class WorkRecordServiceBeanTest {
 		return result;
 	}
 
+	@Ignore
 	@Test
 	public void testGetLatestDaysRecords() {
 

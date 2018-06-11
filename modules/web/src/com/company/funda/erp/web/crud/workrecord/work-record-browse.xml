@@ -8,7 +8,7 @@
     <dsContext>
         <groupDatasource id="workRecordsDs"
                          class="com.company.funda.erp.entity.WorkRecord"
-                         view="_local">
+                         view="workRecord-custom-edit">
             <query>
                 <![CDATA[select e from fe$WorkRecord e]]>
             </query>
@@ -32,6 +32,8 @@
             </actions>
             <columns>
                 <column id="recordNo"/>
+                <column id="workOrder.no"/>
+                <column id="workOrder.inventoryItem.no"/>
                 <column id="startTime"/>
                 <column id="endTime"/>
                 <column id="status"/>

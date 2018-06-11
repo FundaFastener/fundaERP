@@ -33,12 +33,10 @@ import com.company.funda.erp.service.WorkRecordService;
 import com.company.funda.erp.shift.WorkHour;
 import com.company.funda.erp.util.EnumUtil;
 import com.company.funda.erp.util.FundaDateUtil;
-import com.company.funda.erp.web.FundaConfig;
+import com.company.funda.erp.web.FundaWebConfig;
 import com.company.funda.erp.web.util.ScreenUtil;
 import com.company.funda.erp.web.util.ext.IntervalJob;
-import com.haulmont.chile.core.datatypes.impl.EnumUtils;
 import com.haulmont.cuba.core.global.Messages;
-import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.WindowManager.OpenType;
 import com.haulmont.cuba.gui.components.AbstractWindow;
 import com.haulmont.cuba.gui.components.Action;
@@ -52,7 +50,6 @@ import com.haulmont.cuba.gui.components.OptionsGroup;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.components.TextField;
 import com.haulmont.cuba.gui.components.Timer;
-import com.haulmont.cuba.gui.components.ValidationException;
 import com.haulmont.cuba.gui.components.Window;
 import com.haulmont.cuba.gui.data.CollectionDatasource;
 import com.haulmont.cuba.gui.data.Datasource;
@@ -116,7 +113,7 @@ public class WorkOrderOperation extends AbstractWindow  {
 	@Inject
 	private OptionsGroup optionsGroup;
 	@Inject
-	private FundaConfig fundaConfig;
+	private FundaWebConfig fundaConfig;
 	@Inject
 	private CollectionDatasource<WorkRecord, UUID> workRecordsDs;
 	@Inject
@@ -149,9 +146,12 @@ public class WorkOrderOperation extends AbstractWindow  {
 	public void init(Map<String, Object> params) {
 		super.init(params);
 		replaceDataOfTable();
-		
-		setCaption(messages.formatMessage(getClass(), "workOrderRecordOperation", workOrderHelper.getMachine().getNo()));
 		WorkOrder workOrder =  workOrderHelper.getCurrentlyWorkOrder();
+		setCaption(messages.formatMessage(getClass(), 
+										  "workOrderRecordOperation", 
+										  workOrder.getNo(),
+										  workOrder.getInventoryItem().getNo()));
+		
 		setTextFields(workOrder);
 		refreshQuantity(workOrder);
 		setLayoutByStatus(params, workOrder);
@@ -261,6 +261,7 @@ public class WorkOrderOperation extends AbstractWindow  {
     	final WorkRecord wr =  wrTable.getSingleSelected();
     	if(btnOperatableCheck(wr)) {
         	WorkRecord workRecord = getTableMainWR(wr);	
+        	
     		ArrayList<WorkRecord> workRecords = getTableDetachedWR(wr);
         		
     		if(null != workRecord) {
@@ -273,7 +274,9 @@ public class WorkOrderOperation extends AbstractWindow  {
     }
 
 	private void deniedAutoWrDialog() {
-		showMessageDialog("Notice", "Can't modify record by auto generated.", MessageType.WARNING);
+		showMessageDialog(messages.getMainMessage("notice"), 
+				messages.getMainMessage("cannot.modify.record.by.auto.generated"), 
+				MessageType.WARNING);
 	}
 
 	private ArrayList<WorkRecord> getTableDetachedWR(final WorkRecord wr) {
@@ -285,7 +288,7 @@ public class WorkOrderOperation extends AbstractWindow  {
 
 	private WorkRecord getTableMainWR(final WorkRecord wr) {
 		WorkRecord workRecord = workRecordsDs.getItems().stream()
-				.filter(it->(it.getRecordNo()==wr.getRecordNo() && EnumUtil.equalIn(it.getOperateType(), OperateType.MANUAL,OperateType.INTERIM)))
+				.filter(it->(it.getRecordNo().equals(wr.getRecordNo()) && EnumUtil.equalIn(it.getOperateType(), OperateType.MANUAL,OperateType.INTERIM)))
 				.findAny()
 				.orElse(null);
 		return workRecord;
@@ -294,7 +297,9 @@ public class WorkOrderOperation extends AbstractWindow  {
 	private boolean btnOperatableCheck(final WorkRecord wr) {
 		boolean result = true;
 		if(null == wr) {
-    		showMessageDialog("Notice", "Please select a record.", MessageType.CONFIRMATION);
+    		showMessageDialog(messages.getMainMessage("notice"), 
+    				messages.getMainMessage("please.select.record"), 
+    				MessageType.CONFIRMATION);
     		return result = false;
     	}
 
@@ -302,8 +307,9 @@ public class WorkOrderOperation extends AbstractWindow  {
 		Date fromDate = DateUtils.addDays(nowDate,-fundaConfig.getWorkRecordFromDaysBefore());
 		fromDate = DateUtils.round(fromDate, Calendar.DATE);
 		if(!FundaDateUtil.isBetweenNarrowly(wr.getStartTime(), fromDate, nowDate)) {
-			showMessageDialog("Notice",
-					"Please select startTime from "+FundaDateUtil.format(fromDate, FundaDateUtil.Type.DAY_SLASH)+"to now!",
+			showMessageDialog(messages.getMainMessage("notice"),
+					messages.formatMainMessage("please.select.startTime.from.s.to.now", 
+							FundaDateUtil.format(fromDate, FundaDateUtil.Type.DAY_SLASH)),
 					MessageType.CONFIRMATION);
 			return result = false;
 		}
@@ -316,13 +322,16 @@ public class WorkOrderOperation extends AbstractWindow  {
     	if(btnOperatableCheck(wr)) {
     		WorkRecord workRecord = getTableMainWR(wr);	
     		if(null != workRecord) {
-
-    			showOptionDialog("Confirm delete", 
-					"Are you sure delete recordNo:"+workRecord.getRecordNo()+" ?", MessageType.CONFIRMATION, 
+    			
+    			showOptionDialog(messages.getMainMessage("delete.confirm"), 
+    					messages.formatMainMessage("are.you.sure.delete.recordNo", workRecord.getRecordNo()),
+					    MessageType.CONFIRMATION, 
 					new Action[] {
 				        new DialogAction(DialogAction.Type.YES, Status.PRIMARY).withHandler(e -> {
 				        	int deleteRow = workRecordService.deleteBy(wr.getRecordNo());
-			    			showMessageDialog("RecordNo:"+wr.getRecordNo(), "Deleted : "+deleteRow+" rows.", MessageType.CONFIRMATION);
+			    			showMessageDialog(messages.formatMainMessage("recordNo", wr.getRecordNo()), 
+			    					messages.formatMainMessage("delete.rows", deleteRow), 
+			    					MessageType.CONFIRMATION);
 			    			workRecordsDs.refresh();
 				        }),
 				        new DialogAction(DialogAction.Type.NO, Status.NORMAL)

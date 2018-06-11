@@ -6,8 +6,6 @@ import java.util.UUID;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.company.funda.erp.entity.Employee;
 import com.company.funda.erp.entity.Machine;
@@ -36,8 +34,6 @@ public class PickUpWorkOrder extends AbstractWindow {
 	protected Messages messages;
 	@Inject
 	private WorkRecordService workRecordService;
-	
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	public void init(Map<String, Object> params) {
