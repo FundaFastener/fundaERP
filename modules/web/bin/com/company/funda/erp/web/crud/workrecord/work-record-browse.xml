@@ -32,7 +32,8 @@
             </actions>
             <columns>
                 <column id="recordNo"/>
-                <column id="workOrder"/>
+                <column id="workOrder.no"/>
+                <column id="workOrder.inventoryItem.no"/>
                 <column id="startTime"/>
                 <column id="endTime"/>
                 <column id="status"/>
