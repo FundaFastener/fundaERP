@@ -21,7 +21,6 @@ import org.jamel.dbf.processor.DbfRowMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.company.funda.erp.FundaCoreConfig;
 import com.company.funda.erp.entity.InventoryItem;
 import com.company.funda.erp.entity.Machine;
 import com.company.funda.erp.entity.WorkOrder;
@@ -32,7 +31,6 @@ import com.company.funda.erp.util.MinguodateUtil;
 import com.company.funda.erp.util.MinguodateUtil.Delimeter;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.global.AppBeans;
-import com.haulmont.cuba.core.global.Configuration;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.LoadContext;
 
@@ -46,9 +44,7 @@ public class WorkOrderDbfBean implements DbfBean {
 
 	@Override
 	public String getFileName() {
-		FundaCoreConfig fundaCoreConfig = AppBeans.get(Configuration.class)
-		        .getConfig(FundaCoreConfig.class);
-		return fundaCoreConfig.getDbfPartition()+"BMAKE.DBF";
+		return "BMAKE.DBF";
 	}
 
 	@Override
@@ -61,6 +57,8 @@ public class WorkOrderDbfBean implements DbfBean {
 		LocalDate localDateTo = (null != dateTo) ? localDateFromDate((Date)params.get(ImportDBFService.DATE_TO)):null;
 
 		String no = (String)params.get(ImportDBFService.NO);
+		
+		String iiNo = (String)params.get(ImportDBFService.INVENTORY_ITEM_NO);
 		
 		DateTimeFormatter dtf = MinguodateUtil.getDateTimeFormatter(Delimeter.PERIOD);
 		
@@ -89,10 +87,15 @@ public class WorkOrderDbfBean implements DbfBean {
 					return null;
 				}
 				
+				String dataIiNo = dencodeBig5(row[1]);
+				if(StringUtils.isNotBlank(iiNo) && !StringUtils.containsIgnoreCase(dataIiNo, iiNo)) {
+					return null;
+				}
+				
 				WorkOrder workOrder = new WorkOrder();
 				try {
 					workOrder.setNo(dataNo);
-					InventoryItem item = loadInventoryItemByNo(dencodeBig5(row[1]));
+					InventoryItem item = loadInventoryItemByNo(dataIiNo);
 					workOrder.setInventoryItem(item);
 					Machine defaultMachine = loadMachineByNo(dencodeBig5(row[2]));
 					workOrder.setDefaultMachine(defaultMachine);
@@ -122,7 +125,6 @@ public class WorkOrderDbfBean implements DbfBean {
 		if(null == machine) {
 			machine = machines.get(no);
 		}
-		logger.info("m no:{},machine:{}",no,machine.getId());
 		return machine;
 	}
 
@@ -136,16 +138,13 @@ public class WorkOrderDbfBean implements DbfBean {
 	}
 
 	private InventoryItem loadInventoryItemByNo(String no) {
-		logger.info(" ino:{}",no);
 		LoadContext<InventoryItem> loadContext = LoadContext.create(InventoryItem.class)
 				.setQuery(LoadContext.createQuery("select i from fe$InventoryItem i where i.no = :no")
 				.setParameter("no", (Object) no))
 				.setView("inventoryItem-view");
 		InventoryItem inventoryItem = dataManager.load(loadContext);
-		logger.info("db inventoryItem:{}",inventoryItem);
 		if(null == inventoryItem) {
 			inventoryItem = inventoryItems.get(no);
-			logger.info("dbf inventoryItem:{}",inventoryItem);
 		}
 		return inventoryItem;
 	}

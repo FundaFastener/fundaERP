@@ -249,7 +249,6 @@ public class WorkRecordInput extends AbstractWindow {
     }
 
 	private void showErrorMsg(ArrayList<String> errorMsg, boolean needList) {
-		logger.info("errorMsg.size():{}",errorMsg.size());
 		StringBuilder sb = new StringBuilder();
 		errorMsg.forEach(msg->{
 			sb.append(errorMsg.indexOf(msg)).append(" : ")
@@ -298,9 +297,7 @@ public class WorkRecordInput extends AbstractWindow {
 	private List<WorkRecord> getAllCorrectedWorkRecords(){
 		ArrayList<WorkRecord> result = new ArrayList<>(allCorrectedWorkRecords);
 		final WorkRecord currentWorkRecord = workRecordDs.getItem();
-		logger.info("123:{}",result.size());
 		result.removeIf(wr->(currentWorkRecord.getId().equals(wr.getId())));
-		logger.info("456:{}",result.size());
 		return result;
 	}
 
@@ -422,7 +419,6 @@ public class WorkRecordInput extends AbstractWindow {
     private boolean allTimeUsedLessThenMain(Integer inputTimeused) {
     	final Integer sum = workRecordsDs.getItems().stream().mapToInt(WorkRecord::getTimeUsed).sum();
     	final Integer main = workRecordDs.getItem().getTimeUsed();
-    	logger.info("input,sum,main,result :{},{},{},{}",inputTimeused,sum,main,(sum + inputTimeused <= main));
     	if(!(sum + inputTimeused <= main)) {
     		showNotification(messages.getMainMessage("cannot.make.time.used.bigger.then.main"));
     	}

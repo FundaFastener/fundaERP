@@ -250,14 +250,12 @@ public class WorkOrderOperation extends AbstractWindow  {
 	}
 	
     public void createWorkRecord() {
-    	logger.info("create~~");
     	WorkRecord wr = workOrderHelper.genDefaultWorkRecord();
     	wr.setOperateType(OperateType.MANUAL);
     	openWorkRecorkInput(wr);
     }
 
     public void editWorkRecord() {
-    	logger.info("edit~~");
     	final WorkRecord wr =  wrTable.getSingleSelected();
     	if(btnOperatableCheck(wr)) {
         	WorkRecord workRecord = getTableMainWR(wr);	
@@ -317,7 +315,6 @@ public class WorkOrderOperation extends AbstractWindow  {
 	}
     
     public void deleteWorkRecord() {
-    	logger.info("delete~~");
     	final WorkRecord wr =  wrTable.getSingleSelected();
     	if(btnOperatableCheck(wr)) {
     		WorkRecord workRecord = getTableMainWR(wr);	
@@ -472,7 +469,6 @@ public class WorkOrderOperation extends AbstractWindow  {
 		private int countDown = 0;
 		
 		public void initCountDown(LocalDateTime localDateTime) {
-			logger.info(" initCountDown ");
 			int result = 0;
 			if(null != getWorkHour()) {
 				final Long seconds = Duration.between(localDateTime.toLocalTime(), getWorkHour().getTo()).getSeconds();
@@ -483,7 +479,7 @@ public class WorkOrderOperation extends AbstractWindow  {
 				}else if(restSec>LEVEL_ONE_MIN) {
 					result = calcCountDown(LEVEL_ONE_MIN);
 				}
-				logger.info(" seconds:{},restSec:{},result:{}",seconds,restSec,result);
+				logger.info("initCountDown seconds:{},restSec:{},result:{}",seconds,restSec,result);
 			}
 			setCountDown(result);
 		}
@@ -526,17 +522,13 @@ public class WorkOrderOperation extends AbstractWindow  {
 		public void workHourTimeOut(LocalDateTime localDateTime) {
 			if(null != getWorkHour()) {
 				if(getCountDown()>0) {
-//					logger.info("count down:{}",getCountDown());
 					countOneTimes();
 				}else if(getCountDown()==0) {
-//					logger.info("count down ==0 ");
 					final LocalTime localTime = localDateTime.toLocalTime();
 					if(localTime.isAfter(getWorkHour().getTo())) {
-//						logger.info("localTime is afger deadline:{}",localTime.isAfter(getWorkHour().getTo()));
 						getContext().getParams().put("manualEndTime",FundaDateUtil.timeToTodayDateTime(localTime));
 						onStopTaskBtnClick();
 					}else {
-//						logger.info("localTime is afger deadline:{}",localTime.isAfter(getWorkHour().getTo()));
 						initCountDown(localDateTime);
 					}
 					
@@ -567,7 +559,7 @@ public class WorkOrderOperation extends AbstractWindow  {
 		@Override
 		void onStop() {
 			//showNotification(getMessage("TimerIsStopped"), NotificationType.HUMANIZED);
-			logger.debug("{},{}",(String)workOrderTF.getValue(),getMessage("TimerIsStopped"));
+			logger.debug("onStop : {},{}",(String)workOrderTF.getValue(),getMessage("TimerIsStopped"));
 		}
 		
 	}
@@ -633,7 +625,6 @@ public class WorkOrderOperation extends AbstractWindow  {
 			workRecordsDs.refresh();
 			for(WorkRecord wr:workRecordsDs.getItems()) {
 				if(null != wr.getFinishedQuantity()) {
-					logger.info("{}",wr.getFinishedQuantity().toString());
 					completedQuantity = completedQuantity.add(wr.getFinishedQuantity());
 				}
 			}

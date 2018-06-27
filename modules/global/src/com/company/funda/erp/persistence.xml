@@ -10,5 +10,6 @@
         <class>com.company.funda.erp.entity.Machine</class>
         <class>com.company.funda.erp.entity.WorkOrder</class>
         <class>com.company.funda.erp.entity.WorkRecord</class>
+        <class>com.company.funda.erp.enums.PartProcessStandard</class>
     </persistence-unit>
 </persistence>

@@ -20,7 +20,6 @@ import com.company.funda.erp.entity.WorkRecord;
 import com.company.funda.erp.enums.OperateType;
 import com.company.funda.erp.enums.WorkOrderUnit;
 import com.company.funda.erp.util.FundaDateUtil;
-import com.company.funda.erp.util.PrintUtil;
 import com.haulmont.cuba.core.Persistence;
 import com.haulmont.cuba.core.Transaction;
 import com.haulmont.cuba.core.TypedQuery;
@@ -57,7 +56,6 @@ public class WorkRecordServiceBean implements WorkRecordService {
 	@Override
 	public boolean isInWorkRecording(WorkOrder workOrder) {
 		WorkRecord workRecord = getLatestRecord(workOrder);
-		logger.info("isInWorkRecording:{}",PrintUtil.printMultiLine(workRecord));
 		return isInWorkRecording(workRecord);
 	}
 	
@@ -117,7 +115,6 @@ public class WorkRecordServiceBean implements WorkRecordService {
 						workRecord.getNgLossUnit()));
 				
 				workRecord.setFinishedQuantity(finishedQuantity);
-				logger.info("addLoss , finishedQuantity:{}",workRecord.getFinishedQuantity());
 	    return workRecord;
 	}
 
@@ -251,7 +248,6 @@ public class WorkRecordServiceBean implements WorkRecordService {
 		boolean withoutInterim(List<WorkRecord> workRecords) {
 			boolean result = false;
 			result = workRecords.stream().allMatch(wr->(wr.getOperateType()!=OperateType.INTERIM));
-			logger.info("withoutInterim:{}",result);
 			return result;
 		}
 		
@@ -272,13 +268,7 @@ public class WorkRecordServiceBean implements WorkRecordService {
 				datesLine.add(wr.getStartTime());
 			});
 			datesLine.add(null);
-			datesLine.forEach(it->{
-				if(null==it) {
-					logger.info("--null date--");
-				}else {
-					logger.info(FundaDateUtil.format(it, FundaDateUtil.Type.DAY_TIME_HYPHEN));
-				}
-			});
+
 			for(int i=0;i<datesLine.size()-1;i++) {
 				from = datesLine.get(i+1);
 				to  =  datesLine.get(i);

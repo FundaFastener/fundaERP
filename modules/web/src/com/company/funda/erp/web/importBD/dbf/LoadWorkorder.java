@@ -36,6 +36,8 @@ public class LoadWorkorder extends AbstractWindow {
 	private DateField dfTo;
 	@Inject
 	private TextField no;
+	@Inject
+	private TextField iiNo;
 	@Inject 
 	private LookupField lookupField;
 	@Inject 
@@ -59,6 +61,7 @@ public class LoadWorkorder extends AbstractWindow {
     	params.put(ImportDBFService.DATE_FROM, dfFrom.getValue());
 		params.put(ImportDBFService.DATE_TO, dfTo.getValue());
 		params.put(ImportDBFService.NO, no.getValue());
+		params.put(ImportDBFService.INVENTORY_ITEM_NO, iiNo.getValue());
 		workOrdersDs.refresh(params);
 		
     }
@@ -70,6 +73,7 @@ public class LoadWorkorder extends AbstractWindow {
 		dfFrom.setValue(FundaDateUtil.dateFromLocalDate(dFrom));
 		dfTo.setValue(FundaDateUtil.dateFromLocalDate(fTo));
 		no.setValue(null);
+		iiNo.setValue(null);
 		lookupField.setValue(DbfImportType.SKIP_EXISTING);
 		workOrdersDs.clear();
     }

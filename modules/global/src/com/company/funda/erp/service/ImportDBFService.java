@@ -21,6 +21,10 @@ public interface ImportDBFService {
     
     String NO = "NO";
     
+    String WORK_ORDER_NO = "WORK_ORDER_NO";
+    
+    String INVENTORY_ITEM_NO = "INVENTORY_ITEM_NO";
+    
     String SKIP_DATE_CHECK = "SKIP_DATE_CHECK";
     
     /**

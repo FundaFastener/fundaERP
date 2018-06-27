@@ -7,22 +7,17 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.jamel.dbf.processor.DbfRowMapper;
 
-import com.company.funda.erp.FundaCoreConfig;
 import com.company.funda.erp.entity.Machine;
 import com.company.funda.erp.enums.MachineType;
 import com.company.funda.erp.enums.ProcessType;
 import com.company.funda.erp.service.ImportDBFService;
-import com.haulmont.cuba.core.global.AppBeans;
-import com.haulmont.cuba.core.global.Configuration;
 
 public class MachineDbfBean implements DbfBean{
 
 	
 	@Override
 	public String getFileName() {
-		FundaCoreConfig fundaCoreConfig = AppBeans.get(Configuration.class)
-		        .getConfig(FundaCoreConfig.class);
-		return fundaCoreConfig.getDbfPartition()+"BLOADW.DBF";
+		return "BLOADW.DBF";
 	}
 
 	@Override

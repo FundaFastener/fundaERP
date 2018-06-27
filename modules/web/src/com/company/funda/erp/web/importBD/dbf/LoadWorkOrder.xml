@@ -29,6 +29,8 @@
                                    caption="mainMsg://endTime"
                                    resolution="DAY"/>
                         <textField id="no"
+                                   caption="mainMsg://WorkOrderNo"/>
+                        <textField id="iiNo"
                                    caption="mainMsg://InventoryItemNo"/>
                         <button id="queryBtn"
                                 caption="mainMsg://query"
@@ -57,6 +59,7 @@
                 </actions>
                 <columns>
                     <column id="no"/>
+                    <column id="inventoryItem"/>
                     <column id="quantity"/>
                     <column id="status"/>
                     <column id="unit"/>

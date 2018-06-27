@@ -19,7 +19,7 @@
                 <vbox spacing="true">
                     <flowBox spacing="true">
                         <textField id="no"
-                                   caption="mainMsg://InventoryItemNo"/>
+                                   caption="mainMsg://MachineNo"/>
                         <button id="queryBtn"
                                 caption="mainMsg://query"
                                 invoke="query"/>
