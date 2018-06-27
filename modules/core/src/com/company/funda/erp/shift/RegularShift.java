@@ -14,8 +14,6 @@ import com.company.funda.erp.util.FundaDateUtil;
 
 @Component
 public class RegularShift implements Shift{
-	
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	public WorkDay getWorkDayBy(Employee employee,LocalDate localDate) {
@@ -44,8 +42,6 @@ public class RegularShift implements Shift{
 
 	@Override
 	public boolean isWorkHour(List<WorkHour> workHours,LocalTime nowTime) {
-		logger.info("workHours.size:{},nowTime:{}",workHours.size(),nowTime);
-		logger.info("result:{}",workHours.stream().filter(w->w.isWorkingTime(nowTime)).findAny().isPresent());
 		return workHours.stream().filter(w->w.isWorkingTime(nowTime)).findAny().isPresent();
 		
 	}

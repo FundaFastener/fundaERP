@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.company.funda.erp.FundaCoreConfig;
 import com.company.funda.erp.entity.InventoryItem;
 import com.company.funda.erp.entity.Machine;
 import com.company.funda.erp.entity.WorkOrder;
@@ -40,18 +41,19 @@ public class ImportDBFServiceBean implements ImportDBFService {
 
 	@Inject
 	private Persistence persistence;
+	@Inject
+	private FundaCoreConfig fundaCoreConfig;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <E extends StandardEntity> List<E> loadFromDBF(Map<String, Object> params) {
 		DbfBean dbfBean = getDbfBean((Class<E>) params.get(ImportDBFService.TYPE_KEY));
-		String fileName = dbfBean.getFileName();
+		String fileName = fundaCoreConfig.getDbfPartition()+dbfBean.getFileName();
 		Path dbf = Paths.get(fileName);
 		return (List<E>) DbfProcessor.loadData(dbf.toFile(), (DbfRowMapper<E>) dbfBean.getDbfRowMapper(params));
 	}
 
 	private <E extends StandardEntity> DbfBean getDbfBean(Class<E> classEntity) {
-		logger.info("this \"{}\" is doing now.", classEntity.getName());
 		DbfBean dbfBean = null;
 		if (classEntity.equals(Machine.class)) {
 			dbfBean = new MachineDbfBean();
@@ -60,7 +62,6 @@ public class ImportDBFServiceBean implements ImportDBFService {
 		} else if (classEntity.equals(WorkOrder.class)) {
 			dbfBean = new WorkOrderDbfBean();
 		}
-		logger.info("dbfBean:{}", dbfBean);
 		return dbfBean;
 	}
 
@@ -137,7 +138,6 @@ public class ImportDBFServiceBean implements ImportDBFService {
 				query.setParameter(1, w.getNo());
 				dbWorkOrder = query.getFirstResult();
 				
-				logger.info("execute no:{}",w.getNo());
 				try {
 					if (null == dbWorkOrder) {
 						updateCascade(entityManager, w);

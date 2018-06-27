@@ -17,14 +17,11 @@ import org.jamel.dbf.processor.DbfRowMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.company.funda.erp.FundaCoreConfig;
 import com.company.funda.erp.entity.InventoryItem;
 import com.company.funda.erp.enums.InventoryCategory;
 import com.company.funda.erp.service.ImportDBFService;
 import com.company.funda.erp.util.MinguodateUtil;
 import com.company.funda.erp.util.MinguodateUtil.Delimeter;
-import com.haulmont.cuba.core.global.AppBeans;
-import com.haulmont.cuba.core.global.Configuration;
 
 public class InventoryItemDbfBean implements DbfBean {
 	
@@ -32,14 +29,12 @@ public class InventoryItemDbfBean implements DbfBean {
 	
 	@Override
 	public String getFileName() {
-		FundaCoreConfig fundaCoreConfig = AppBeans.get(Configuration.class)
-		        .getConfig(FundaCoreConfig.class);
-		return fundaCoreConfig.getDbfPartition()+"bscrew.dbf";
+		return "bscrew.dbf";
 	}
 
 	@Override
 	public DbfRowMapper<InventoryItem> getDbfRowMapper(Map<String, Object> params) {
-		logger.info("getDbfRowMapper:{},{},{}",params.get(ImportDBFService.DATE_FROM),params.get(ImportDBFService.DATE_TO),params.get(ImportDBFService.NO));
+//		logger.info("getDbfRowMapper:{},{},{}",params.get(ImportDBFService.DATE_FROM),params.get(ImportDBFService.DATE_TO),params.get(ImportDBFService.NO));
 		Date dateFrom = (Date)params.get(ImportDBFService.DATE_FROM);
 		LocalDate localDateFrom = (null != dateFrom) ? localDateFromDate((Date)params.get(ImportDBFService.DATE_FROM)):null;
 
