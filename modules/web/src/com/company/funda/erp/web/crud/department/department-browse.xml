@@ -90,7 +90,6 @@ order by e.name]]>
                     <column id="no"/>
                     <column id="name"/>
                     <column id="type"/>
-                    <column id="processType"/>
                     <column id="brand"/>
                     <column id="remark"/>
                 </columns>

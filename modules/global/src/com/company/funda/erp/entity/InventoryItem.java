@@ -9,6 +9,10 @@ import javax.persistence.Table;
 import com.company.funda.erp.enums.InventoryCategory;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.global.DeletePolicy;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 
 @NamePattern("%s %s|no,name1")
 @Table(name = "FE_INVENTORY_ITEM")
@@ -33,6 +37,10 @@ public class InventoryItem extends StandardEntity {
 
     @Column(name = "NET_WEIGHT")
     protected BigDecimal netWeight;
+
+
+
+
 
     public void setCategory(InventoryCategory category) {
         this.category = category == null ? null : category.getId();

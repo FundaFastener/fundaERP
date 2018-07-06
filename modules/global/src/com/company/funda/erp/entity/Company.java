@@ -13,6 +13,7 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 public class Company extends StandardEntity {
     private static final long serialVersionUID = -8223099737966322008L;
 
+
     @Column(name = "NO_", nullable = false, unique = true, length = 50)
     protected String no;
 
@@ -22,6 +23,9 @@ public class Company extends StandardEntity {
     @Column(name = "SHORT_NAME", length = 20)
     protected String shortName;
 
+
+
+
     public void setNo(String no) {
         this.no = no;
     }
@@ -29,6 +33,7 @@ public class Company extends StandardEntity {
     public String getNo() {
         return no;
     }
+
 
     public void setName(String name) {
         this.name = name;

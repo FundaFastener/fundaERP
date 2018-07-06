@@ -51,4 +51,12 @@
             template="com/company/funda/erp/web/importBD/dbf/LoadInventoryItem.xml"/>
     <screen id="LoadWorkOrder"
             template="com/company/funda/erp/web/importBD/dbf/LoadWorkOrder.xml"/>
+    <screen id="fe$MachineProcesses.browse"
+            template="com/company/funda/erp/web/crud/machineprocesses/machine-processes-browse.xml"/>
+    <screen id="fe$MachineProcesses.edit"
+            template="com/company/funda/erp/web/crud/machineprocesses/machine-processes-edit.xml"/>
+    <screen id="fe$PartProcessesStandard.browse"
+            template="com/company/funda/erp/web/crud/PartProcessesStandard/part-processes-standard-browse.xml"/>
+    <screen id="fe$PartProcessesStandard.edit"
+            template="com/company/funda/erp/web/crud/PartProcessesStandard/part-processes-standard-edit.xml"/>
 </screen-config>

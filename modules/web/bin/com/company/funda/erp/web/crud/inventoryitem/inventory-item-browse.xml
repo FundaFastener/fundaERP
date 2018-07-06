@@ -32,9 +32,9 @@
             </actions>
             <columns>
                 <column id="no"/>
+                <column id="category"/>
                 <column id="name1"/>
                 <column id="name2"/>
-                <column id="category"/>
                 <column id="materialWeight"/>
                 <column id="netWeight"/>
             </columns>

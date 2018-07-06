@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.funda.erp.web.crud.machineprocesses.MachineProcessesBrowse"
+        focusComponent="machineProcessesesTable"
+        lookupComponent="machineProcessesesTable"
+        messagesPack="com.company.funda.erp.web.crud.machineprocesses">
+    <dsContext>
+        <groupDatasource id="machineProcessesesDs"
+                         class="com.company.funda.erp.entity.MachineProcesses"
+                         view="machineProcesses-view_1">
+            <query>
+                <![CDATA[select e from fe$MachineProcesses e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="machineProcessesesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="machineProcessesesTable"
+                datasource="machineProcessesesDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="machineProcessesesTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="machine"/>
+                <column id="processType"/>
+                <column id="attribute"/>
+            </columns>
+            <rows datasource="machineProcessesesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="machineProcessesesTable.create"/>
+                <button id="editBtn"
+                        action="machineProcessesesTable.edit"/>
+                <button id="removeBtn"
+                        action="machineProcessesesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

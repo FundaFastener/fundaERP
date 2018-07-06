@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <studio>
     <screenDesigner>
+        <screen layoutAnalysisDisabled="true"
+                module="web"
+                reference="com/company/funda/erp/web/crud/machine/machine-browse.xml"/>
     </screenDesigner>
+    <dbScripts>
+        <excludes>
+            <postgres>
+            </postgres>
+        </excludes>
+    </dbScripts>
 </studio>

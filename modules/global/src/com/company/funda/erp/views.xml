@@ -8,7 +8,11 @@
           name="machine-department">
         <property name="department"
                   view="_minimal">
-            <property name="name"/>
+        </property>
+        <property name="processTypes"
+                  view="_local">
+            <property name="machine"
+                      view="_minimal"/>
         </property>
     </view>
     <view class="com.company.funda.erp.entity.Department"
@@ -28,11 +32,9 @@
           name="workOrder-mostly">
         <property name="defaultMachine"
                   view="_minimal">
-            <property name="processType"/>
         </property>
         <property name="backupMachines"
                   view="_minimal">
-            <property name="processType"/>
         </property>
         <property name="inventoryItem"
                   view="_minimal">
@@ -60,7 +62,6 @@
         <property name="defaultMachine"
                   view="_minimal">
             <property name="type"/>
-            <property name="processType"/>
             <property name="brand"/>
             <property name="department"
                       view="_minimal"/>
@@ -76,7 +77,6 @@
         <property name="backupMachines"
                   view="_minimal">
             <property name="type"/>
-            <property name="processType"/>
             <property name="brand"/>
             <property name="department"
                       view="_minimal"/>
@@ -115,5 +115,31 @@
                   view="_minimal"/>
         <property name="defaultMachine"
                   view="_minimal"/>
+    </view>
+    <view class="com.company.funda.erp.entity.MachineProcesses"
+          extends="_local"
+          name="machineProcesses-view"/>
+    <view class="com.company.funda.erp.entity.MachineProcesses"
+          extends="_local"
+          name="machineProcesses-view_1">
+        <property name="machine"
+                  view="_minimal">
+            <property name="department"
+                      view="_minimal"/>
+            <property name="processTypes"
+                      view="_minimal"/>
+        </property>
+    </view>
+    <view class="com.company.funda.erp.entity.PartProcessesStandard"
+          extends="_local"
+          name="partProcessesStandard-view">
+        <property name="partNo"
+                  view="_minimal"/>
+        <property name="processType"
+                  view="_minimal">
+            <property name="attribute"/>
+            <property name="machine"
+                      view="_minimal"/>
+        </property>
     </view>
 </views>
