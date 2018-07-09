@@ -2,12 +2,14 @@ package com.company.funda.erp.importDbf;
 
 import static com.company.funda.erp.util.FundaStringUtil.dencodeBig5;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jamel.dbf.processor.DbfRowMapper;
 
 import com.company.funda.erp.entity.Machine;
+import com.company.funda.erp.entity.MachineProcesses;
 import com.company.funda.erp.enums.MachineType;
 import com.company.funda.erp.enums.ProcessType;
 import com.company.funda.erp.service.ImportDBFService;
@@ -46,6 +48,8 @@ public class MachineDbfBean implements DbfBean{
 					machine.setName(dencodeBig5(row[1]));
 					MachineType type = null;
 					ProcessType pType = null;
+					MachineProcesses machineProcess = null;
+					ArrayList<MachineProcesses> processTypes = new ArrayList<>();
 					String firstChar = machine.getNo().substring(0, 1);
 					String firstTwoChar = machine.getNo().substring(0, 2);
 					if (StringUtils.equalsIgnoreCase((String) "F", (String) firstChar)) {
@@ -70,7 +74,11 @@ public class MachineDbfBean implements DbfBean{
 						return null;
 					}
 					machine.setType(type);
-					machine.setProcessType(pType);
+					machineProcess = new MachineProcesses();
+					machineProcess.setMachine(machine);
+					machineProcess.setProcessType(pType);
+					processTypes.add(machineProcess);
+					machine.setProcessTypes(processTypes);
 					machine.setRemark(dencodeBig5(row[9]));
 
 				} catch (Exception e) {

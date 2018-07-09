@@ -8,7 +8,10 @@
     <dsContext>
         <datasource id="machineDs"
                     class="com.company.funda.erp.entity.Machine"
-                    view="machine-department"/>
+                    view="machine-department">
+            <collectionDatasource id="processTypesDs"
+                                  property="processTypes"/>
+        </datasource>
         <collectionDatasource id="departmentsDs"
                               class="com.company.funda.erp.entity.Department"
                               view="department-view">
@@ -19,23 +22,49 @@
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="windowActions"
-            spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="machineDs">
-            <column width="250px">
-                <field property="no"/>
-                <field property="name"/>
-                <field property="type"/>
-                <field property="processType"/>
-                <field property="brand"/>
-                <field optionsDatasource="departmentsDs"
-                       property="department"/>
-                <field property="remark"
-                       rows="5"/>
-            </column>
-        </fieldGroup>
-        <frame id="windowActions"
-               screen="editWindowActions"/>
+    <layout spacing="true">
+        <scrollBox height="100%"
+                   spacing="true">
+            <fieldGroup id="fieldGroup"
+                        datasource="machineDs">
+                <column width="250px">
+                    <field property="no"/>
+                    <field property="name"/>
+                    <field property="type"/>
+                    <field property="brand"/>
+                    <field optionsDatasource="departmentsDs"
+                           property="department"/>
+                    <field property="remark"
+                           rows="5"/>
+                </column>
+            </fieldGroup>
+            <groupBox id="processTypesBox">
+                <table id="processTypesTable"
+                       caption="mainMsg://processTypesOfMachine"
+                       height="200px"
+                       width="100%">
+                    <actions>
+                        <action id="create"/>
+                        <action id="edit"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="processType"
+                                caption="mainMsg://processType"/>
+                        <column id="attribute"
+                                caption="mainMsg://attribute"/>
+                    </columns>
+                    <rows datasource="processTypesDs"/>
+                    <buttonsPanel>
+                        <button action="processTypesTable.create"/>
+                        <button action="processTypesTable.edit"/>
+                        <button action="processTypesTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+            <frame id="windowActions"
+                   screen="editWindowActions"
+                   width="AUTO"/>
+        </scrollBox>
     </layout>
 </window>

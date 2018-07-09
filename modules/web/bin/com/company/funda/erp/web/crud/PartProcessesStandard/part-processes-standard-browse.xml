@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://PartProcessesStandardBrowser"
+        class="com.company.funda.erp.web.crud.PartProcessesStandard.PartProcessesStandardBrowse"
+        focusComponent="partProcessesStandardsTable"
+        lookupComponent="partProcessesStandardsTable"
+        messagesPack="com.company.funda.erp.web">
+    <dsContext>
+        <groupDatasource id="partProcessesStandardsDs"
+                         class="com.company.funda.erp.entity.PartProcessesStandard"
+                         view="partProcessesStandard-view">
+            <query>
+                <![CDATA[select e from fe$PartProcessesStandard e
+where e.to is null]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="partProcessesStandardsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="partProcessesStandardsTable"
+                datasource="partProcessesStandardsDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="partProcessesStandardsTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="outputUnit"/>
+                <column id="timeUnit"/>
+                <column id="majorSetupTime"/>
+                <column id="minorSetupTime"/>
+                <column id="output"/>
+                <column id="partNo"/>
+                <column id="processType.machine"/>
+                <column id="processType.processType"/>
+            </columns>
+            <rows datasource="partProcessesStandardsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="partProcessesStandardsTable.create"/>
+                <button id="editBtn"
+                        action="partProcessesStandardsTable.edit"/>
+                <button id="removeBtn"
+                        action="partProcessesStandardsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

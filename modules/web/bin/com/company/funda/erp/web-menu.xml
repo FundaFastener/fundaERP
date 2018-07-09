@@ -9,6 +9,7 @@
         <item screen="fe$Machine.browse"/>
         <item screen="fe$WorkOrder.browse"/>
         <item screen="fe$WorkRecord.browse"/>
+        <item screen="fe$PartProcessesStandard.browse"/>
     </menu>
     <menu id="ManufacturingControlSystem"
           insertBefore="administration">

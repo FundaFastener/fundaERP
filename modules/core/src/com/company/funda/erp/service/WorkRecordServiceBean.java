@@ -11,8 +11,6 @@ import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 
 import org.apache.commons.lang3.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.company.funda.erp.entity.WorkOrder;
@@ -35,7 +33,7 @@ public class WorkRecordServiceBean implements WorkRecordService {
 
     private ValidateWorkRecord validateWorkRecord = new ValidateWorkRecord() ;
 	
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+//	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public WorkRecord getLatestRecord(WorkOrder workOrder) {

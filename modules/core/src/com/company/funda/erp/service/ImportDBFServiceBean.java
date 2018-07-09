@@ -107,10 +107,24 @@ public class ImportDBFServiceBean implements ImportDBFService {
 				dbMachine = query.getFirstResult();
 
 				if (null == dbMachine) {
+					m.getProcessTypes().forEach(mp->{
+						if(PersistenceHelper.isNew(mp)) {
+							entityManager.persist(mp);
+						}
+					});
 					entityManager.persist(m);
 					counter.incrementAndGet();
 				} else if (dbfImportType == DbfImportType.MANDATORY_OVERWRITE) {
+					//TODO-H Ask Jeremy how to do?
 					m.setId(dbMachine.getId());
+					dbMachine.getProcessTypes().forEach(dmp->{
+						entityManager.remove(dmp);
+					});
+					m.getProcessTypes().forEach(mp->{
+						if(PersistenceHelper.isNew(mp)) {
+							entityManager.persist(mp);
+						}
+					});
 					entityManager.merge(m);
 					counter.incrementAndGet();
 				}

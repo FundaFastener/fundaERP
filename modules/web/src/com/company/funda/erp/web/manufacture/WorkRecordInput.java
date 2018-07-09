@@ -316,7 +316,7 @@ public class WorkRecordInput extends AbstractWindow {
 	private boolean checkInRecordSection(ArrayList<String> errorMsg) {
 		boolean needList = false;
 		if(workRecordService.isInRecordSection(getAllCorrectedWorkRecords(), (Date) startTimeField.getValue())) {
-			
+			logger.info("startTimeField.getValue():{}",startTimeField.getValue());
 			errorMsg.add(messages.formatMainMessage("cannot.interrupt.other.record", startTimeField.getCaption()));
 			needList = true;
 		}

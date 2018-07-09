@@ -37,8 +37,10 @@
                     <field property="recordNo"/>
                     <field optionsDatasource="employeesDs"
                            property="employee"/>
-                    <field property="startTime"/>
-                    <field property="endTime"/>
+                    <field property="startTime"
+                           resolution="SEC"/>
+                    <field property="endTime"
+                           resolution="SEC"/>
                     <field property="status"/>
                     <field property="unit"/>
                     <field property="unitWeight"/>

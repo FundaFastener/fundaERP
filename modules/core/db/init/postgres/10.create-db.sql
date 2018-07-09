@@ -92,7 +92,6 @@ create table FE_MACHINE (
     NO_ varchar(10) not null,
     NAME varchar(50) not null,
     TYPE_ integer,
-    PROCESS_TYPE integer not null,
     BRAND varchar(30),
     DEPARTMENT_ID uuid,
     REMARK text,
@@ -158,3 +157,45 @@ create table FE_WORK_RECORD (
     primary key (ID)
 )^
 -- end FE_WORK_RECORD
+-- begin FE_MACHINE_PROCESSES
+create table FE_MACHINE_PROCESSES (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    MACHINE_ID uuid not null,
+    PROCESS_TYPE integer not null,
+    ATTRIBUTE integer,
+    --
+    primary key (ID)
+)^
+-- end FE_MACHINE_PROCESSES
+-- begin FE_PART_PROCESSES_STANDARD
+create table FE_PART_PROCESSES_STANDARD (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    PART_NO_ID uuid not null,
+    PROCESS_TYPE_ID uuid not null,
+    FROM_ date not null,
+    TO_ date,
+    OUTPUT_ integer,
+    OUTPUT_UNIT integer,
+    TIME_UNIT integer,
+    MAJOR_SETUP_TIME decimal(19, 2),
+    MINOR_SETUP_TIME decimal(19, 2),
+    --
+    primary key (ID)
+)^
+-- end FE_PART_PROCESSES_STANDARD

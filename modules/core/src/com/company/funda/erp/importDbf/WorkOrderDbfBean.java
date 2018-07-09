@@ -101,7 +101,7 @@ public class WorkOrderDbfBean implements DbfBean {
 					workOrder.setDefaultMachine(defaultMachine);
 					workOrder.setQuantity(new BigDecimal((Double) row[3]));
 					workOrder.setUnit(WorkOrderUnit.PC);
-					workOrder.setProcessType(defaultMachine.getProcessType());
+					workOrder.setProcessType(null);//TODO-H Ask Jeremy how to do?
 					workOrder.setStatus(WorkOrderStatus.NOT_STARTED);
 
 				} catch (Exception e) {

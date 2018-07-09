@@ -43,13 +43,13 @@
                                    caption="mainMsg://startTime"
                                    datasource="workRecordDs"
                                    property="startTime"
-                                   resolution="MIN"/>
+                                   resolution="SEC"/>
                         <dateField id="endTimeField"
                                    caption="mainMsg://endTime"
                                    datasource="workRecordDs"
                                    property="endTime"
                                    required="true"
-                                   resolution="MIN"/>
+                                   resolution="SEC"/>
                     </row>
                 </rows>
             </grid>

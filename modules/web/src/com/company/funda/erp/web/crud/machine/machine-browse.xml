@@ -34,7 +34,7 @@
                 <column id="no"/>
                 <column id="name"/>
                 <column id="type"/>
-                <column id="processType"/>
+                <column id="processTypes"/>
                 <column id="brand"/>
                 <column id="department"/>
                 <column id="remark"/>

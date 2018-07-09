@@ -19,7 +19,7 @@
                 <vbox spacing="true">
                     <flowBox spacing="true">
                         <textField id="no"
-                                   caption="mainMsg://InventoryItemNo"/>
+                                   caption="mainMsg://MachineNo"/>
                         <button id="queryBtn"
                                 caption="mainMsg://query"
                                 invoke="query"/>
@@ -50,7 +50,6 @@
                     <column id="no"/>
                     <column id="name"/>
                     <column id="type"/>
-                    <column id="processType"/>
                     <column id="brand"/>
                     <column id="remark"/>
                 </columns>
