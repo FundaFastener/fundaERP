@@ -259,9 +259,12 @@ public class WorkOrderOperation extends AbstractWindow  {
     	final WorkRecord wr =  wrTable.getSingleSelected();
     	if(btnOperatableCheck(wr)) {
         	WorkRecord workRecord = getTableMainWR(wr);	
-        	
+        	logger.info("********************* editWorkRecord  *********************");
+        	logger.info("main:{},{}",workRecord.getRecordNo(),workRecord.getOperateType());
     		ArrayList<WorkRecord> workRecords = getTableDetachedWR(wr);
-        		
+    		workRecords.forEach(wrs->{
+    			logger.info("miner:{},{}",wrs.getRecordNo(),wrs.getOperateType());
+    		});
     		if(null != workRecord) {
     			openWorkRecorkInput(workRecord, workRecords);
     		}else {
@@ -278,8 +281,12 @@ public class WorkOrderOperation extends AbstractWindow  {
 	}
 
 	private ArrayList<WorkRecord> getTableDetachedWR(final WorkRecord wr) {
+		logger.info(" ***** lists *****");
+		workRecordsDs.getItems().forEach(wrds->{
+			logger.info("wrds:{},{}",wrds.getRecordNo(),wrds.getOperateType());
+		});
 		ArrayList<WorkRecord> workRecords = (ArrayList<WorkRecord>) workRecordsDs.getItems().stream()
-		    .filter(it->(it.getRecordNo()==wr.getRecordNo() && it.getOperateType()==OperateType.DETACH))
+		    .filter(it->(it.getRecordNo().equals(wr.getRecordNo()) && it.getOperateType()==OperateType.DETACH))
 		    .collect(Collectors.toList());
 		return workRecords;
 	}
@@ -649,6 +656,7 @@ public class WorkOrderOperation extends AbstractWindow  {
 		private void commitWorkOrder(WorkOrder workOrder) {
 	    	workOrderDs.setItem(workOrder);
 	    	workOrderDs.commit();
+	    	workOrderDs.refresh();
 		}
 		
 		private void genWorkRecord(WorkRecordStatus workRecordStatus) {
@@ -691,6 +699,8 @@ public class WorkOrderOperation extends AbstractWindow  {
 			WorkOrder workOrder = workOrderHelper.getWorkOrder();
 	    	workOrder.setStatus(stataus);
 	    	workOrderHelper.commitWorkOrder(workOrder);
+	    	workOrderDs.refresh();
+	    	getContext().getParams().put("workRecord", workOrderDs.getItem());
 		}
 		
 		private boolean isInWorkRecording() {
