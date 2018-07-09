@@ -22,6 +22,8 @@ import com.haulmont.cuba.core.Persistence;
 import com.haulmont.cuba.core.Transaction;
 import com.haulmont.cuba.core.TypedQuery;
 import com.haulmont.cuba.core.app.UniqueNumbersAPI;
+import com.haulmont.cuba.core.entity.Entity;
+import com.haulmont.cuba.core.global.PersistenceHelper;
 
 @Service(WorkRecordService.NAME)
 public class WorkRecordServiceBean implements WorkRecordService {
@@ -66,15 +68,28 @@ public class WorkRecordServiceBean implements WorkRecordService {
 	@Transactional
 	public void commitWorkRecords(WorkOrder workOrder,WorkRecord workRecord,Collection<WorkRecord> workRecords) throws ValidationException {
 		try(Transaction tx = persistence.getTransaction()){
+			
 			subtractLoss(workRecord);
-			persistence.getEntityManager().merge(workRecord);
+			if(PersistenceHelper.isNew(workRecord)) {
+				persistence.getEntityManager().persist(workRecord);
+			}else {
+				persistence.getEntityManager().merge(workRecord);
+			}
+			persistOrMerge(workRecord);
 			deleteAllDetachItem(workOrder, workRecord.getRecordNo());
 			tx.commitRetaining();
 			workRecords.forEach(wr->{
-				persistence.getEntityManager().merge(wr);
+				persistOrMerge(wr);
 				tx.commitRetaining();
 			});
 			tx.commit();
+		}
+	}
+	private void persistOrMerge(@SuppressWarnings("rawtypes") Entity entity) {
+		if(PersistenceHelper.isNew(entity)) {
+			persistence.getEntityManager().persist(entity);
+		}else {
+			persistence.getEntityManager().merge(entity);
 		}
 	}
 

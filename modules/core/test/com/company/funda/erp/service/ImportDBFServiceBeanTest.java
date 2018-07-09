@@ -122,7 +122,6 @@ public class ImportDBFServiceBeanTest {
 						pType = ProcessType.THREADING_FLAT;
 					} 
 					machine.setType(type);
-					machine.setProcessType(pType);
 					machine.setRemark(encodeBig5(row[9]));
 
 				} catch (Exception e) {
