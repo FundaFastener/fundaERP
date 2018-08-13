@@ -49,6 +49,7 @@
                 <column id="remark"/>
                 <column id="workHourType"/>
                 <column id="operateType"/>
+                <column id="timeUsed"/>
             </columns>
             <rows datasource="workRecordsDs"/>
             <rowsCount/>

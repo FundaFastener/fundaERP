@@ -18,5 +18,8 @@
     <menu id="importDB"
           insertBefore="administration">
         <item screen="AskPreLoad"/>
+        <item screen="AskPreLoadExcel"/>
     </menu>
+    <menu id="reports"
+          insertBefore="administration"/>
 </menu-config>

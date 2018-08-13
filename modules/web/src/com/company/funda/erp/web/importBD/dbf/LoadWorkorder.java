@@ -19,7 +19,6 @@ import com.haulmont.cuba.gui.components.DateField;
 import com.haulmont.cuba.gui.components.LookupField;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.components.TextField;
-import com.haulmont.cuba.gui.components.Frame.NotificationType;
 import com.haulmont.cuba.gui.data.CollectionDatasource;
 
 public class LoadWorkorder extends AbstractWindow {

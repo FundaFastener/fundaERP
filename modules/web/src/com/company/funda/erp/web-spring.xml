@@ -18,6 +18,8 @@
                        value="com.company.funda.erp.service.ImportDBFService"/>
                 <entry key="fe_PartProcessesService"
                        value="com.company.funda.erp.service.PartProcessesService"/>
+                <entry key="fe_ImportExcelService"
+                       value="com.company.funda.erp.service.ImportExcelService"/>
             </map>
         </property>
     </bean>

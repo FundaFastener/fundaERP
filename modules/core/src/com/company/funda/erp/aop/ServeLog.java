@@ -35,4 +35,5 @@ public class ServeLog {
 		Class<?> classService = joinPoint.getTarget().getClass();
 		logger.info(" ***** END {}.{} ***** ",classService.getSimpleName(),joinPoint.getSignature().getName());
 	}
+
 }

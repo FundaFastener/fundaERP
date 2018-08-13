@@ -10,4 +10,7 @@ public interface FundaCoreConfig extends Config {
 
 	@Property("dbf.partition")
 	String getDbfPartition();
+
+	@Property("import.excel.path ")
+	String getExcelFilePath();
 }

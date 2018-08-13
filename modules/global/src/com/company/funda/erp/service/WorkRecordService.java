@@ -28,6 +28,8 @@ public interface WorkRecordService {
     
     long getNextRecordNo();
     
+    long geteCurrentNo();
+    
     void deleteAllDetachItem(WorkOrder workOrder,Long recordNo);
     
     void subtractLoss(WorkRecord workRecord) throws ValidationException;

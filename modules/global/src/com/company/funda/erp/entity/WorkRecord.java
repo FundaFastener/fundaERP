@@ -66,7 +66,6 @@ public class WorkRecord extends StandardEntity {
     @Column(name = "STATUS", nullable = false)
     protected Integer status;
 
-    @NotNull(message = "{msg://com.company.funda.erp.entity/NotNull}")
     @Column(name = "UNIT")
     protected Integer unit;
 
