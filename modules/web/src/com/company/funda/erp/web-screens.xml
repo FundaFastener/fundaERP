@@ -59,4 +59,10 @@
             template="com/company/funda/erp/web/crud/PartProcessesStandard/part-processes-standard-browse.xml"/>
     <screen id="fe$PartProcessesStandard.edit"
             template="com/company/funda/erp/web/crud/PartProcessesStandard/part-processes-standard-edit.xml"/>
+    <screen id="PartProcessesRpt"
+            template="com/company/funda/erp/web/reports/manufacture/PartProcessesRpt.xml"/>
+    <screen id="LoadWorkRecorder"
+            template="com/company/funda/erp/web/importBD/excel/LoadWorkRecorder.xml"/>
+    <screen id="AskPreLoadExcel"
+            template="com/company/funda/erp/web/importBD/excel/AskPreLoadExcel.xml"/>
 </screen-config>

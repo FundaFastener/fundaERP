@@ -195,6 +195,11 @@ public class WorkRecordServiceBean implements WorkRecordService {
 	public long getNextRecordNo() {
 		return uniqueNumbers.getNextNumber("recordNo");
 	}
+	
+	@Override
+	public long geteCurrentNo() {
+		return uniqueNumbers.getCurrentNumber("recordNo");
+	}
 
 	@Override
 	public void deleteAllDetachItem(WorkOrder workOrder,Long recordNo) {

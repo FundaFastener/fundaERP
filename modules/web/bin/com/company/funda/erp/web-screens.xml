@@ -59,4 +59,6 @@
             template="com/company/funda/erp/web/crud/PartProcessesStandard/part-processes-standard-browse.xml"/>
     <screen id="fe$PartProcessesStandard.edit"
             template="com/company/funda/erp/web/crud/PartProcessesStandard/part-processes-standard-edit.xml"/>
+    <screen id="PartProcessesRpt"
+            template="com/company/funda/erp/web/reports/manufacture/PartProcessesRpt.xml"/>
 </screen-config>

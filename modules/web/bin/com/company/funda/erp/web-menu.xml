@@ -10,6 +10,7 @@
         <item screen="fe$WorkOrder.browse"/>
         <item screen="fe$WorkRecord.browse"/>
         <item screen="fe$PartProcessesStandard.browse"/>
+        <item screen="PartProcessesRpt"/>
     </menu>
     <menu id="ManufacturingControlSystem"
           insertBefore="administration">
@@ -19,4 +20,6 @@
           insertBefore="administration">
         <item screen="AskPreLoad"/>
     </menu>
+    <menu id="reports"
+          insertBefore="administration"/>
 </menu-config>

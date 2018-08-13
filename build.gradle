@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.7.13'
+    ext.cubaVersion = '6.9-SNAPSHOT'
     repositories {
         
         maven {
@@ -23,11 +23,8 @@ def guiModule = project(':fe-gui')
 def webModule = project(':fe-web')
 def webThemesModule = project(':fe-web-themes')
 
-def servletApi = 'org.apache.tomcat:tomcat-servlet-api:8.0.26'
-
-
-apply(plugin: 'java')
-apply(plugin: 'eclipse')
+def servletApi = 'javax.servlet:javax.servlet-api:3.1.0'
+apply(plugin: 'idea')
 apply(plugin: 'cuba')
 
 cuba {
@@ -52,8 +49,8 @@ def postgres = 'org.postgresql:postgresql:9.4.1212'
 configure([globalModule, coreModule, guiModule, webModule]) {
     apply(plugin: 'java')
     apply(plugin: 'maven')
-    apply(plugin: 'eclipse')
-    apply(plugin: 'cuba')
+    apply(plugin: 'idea')
+apply(plugin: 'cuba')
 
     dependencies {
         testCompile('junit:junit:4.12')
@@ -74,6 +71,8 @@ configure(globalModule) {
     dependencies {
         compile('org.apache.commons:commons-lang3:3.1')
         compile('org.jamel.dbf:dbf-reader:0.0.3')
+        compile('org.apache.poi:poi-ooxml:3.17')
+        compile('com.monitorjbl:xlsx-streamer:1.2.0')
     }
     task enhance(type: CubaEnhancing)
 
@@ -203,7 +202,8 @@ configure(webModule) {
 configure(webThemesModule) {
     apply(plugin: 'java')
     apply(plugin: 'maven')
-    apply(plugin: 'cuba')
+    apply(plugin: 'idea')
+apply(plugin: 'cuba')
 
     appModuleType = 'web-themes'
 
@@ -243,7 +243,7 @@ task restart(dependsOn: ['stop', ':fe-core:deploy', ':fe-web:deploy'], descripti
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.4'
+    gradleVersion = '4.3.1'
 }
 
 apply from: 'extra.gradle'

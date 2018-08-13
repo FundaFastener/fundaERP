@@ -34,9 +34,10 @@
                 <column width="250px">
                     <field optionsDatasource="workOrdersDs"
                            property="workOrder"/>
-                    <field property="recordNo"/>
                     <field optionsDatasource="employeesDs"
                            property="employee"/>
+                    <field editable="false"
+                           property="recordNo"/>
                     <field property="startTime"
                            resolution="SEC"/>
                     <field property="endTime"

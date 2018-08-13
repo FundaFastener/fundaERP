@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://LoadWorkRecord"
+        class="com.company.funda.erp.web.importBD.excel.LoadWorkRecorder"
+        messagesPack="com.company.funda.erp.web.importBD.excel">
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <groupBox spacing="true">
+            <upload id="uploadField"
+                    caption="mainMsg://importFile"
+                    showClearButton="true"
+                    showFileName="true"/>
+            <button caption="mainMsg://executeImport"/>
+        </groupBox>
+    </layout>
+</window>

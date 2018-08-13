@@ -22,7 +22,7 @@ import com.haulmont.cuba.core.global.AppBeans;
 
 import mockit.integration.junit4.JMockit;
 
-@RunWith(JMockit.class)
+//@RunWith(JMockit.class)
 public class WorkHourAgentServiceBeanTest {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -37,7 +37,7 @@ public class WorkHourAgentServiceBeanTest {
 		whasb = AppBeans.get(WorkHourAgentService.class);
 	}
 	
-	@Test
+	//@Test
 	public void testIsOnJob() {
 
 		logger.info("start test isOnJob ----- ");
@@ -56,7 +56,7 @@ public class WorkHourAgentServiceBeanTest {
 		logger.info("end test isOnJob ----- ");
 	}
 	
-	@Test
+	//@Test
 	public void testGetWorkHourType() {
 		
 		LocalDateTime sunday = LocalDateTime.of(2018, 4, 29, 8, 0);
