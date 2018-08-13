@@ -22,7 +22,7 @@ import com.haulmont.cuba.core.global.AppBeans;
 
 import mockit.integration.junit4.JMockit;
 
-@RunWith(JMockit.class)
+//@RunWith(JMockit.class)
 public class WorkHourAgentServiceBeanTest {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());

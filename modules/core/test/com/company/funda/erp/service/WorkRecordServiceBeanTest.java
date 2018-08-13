@@ -28,7 +28,7 @@ import com.haulmont.cuba.core.global.Metadata;
 
 public class WorkRecordServiceBeanTest {
 
-	@ClassRule
+	//@ClassRule
 	public static FeTestContainer cont = FeTestContainer.Common.INSTANCE;
 
 	private static WorkRecordService WorkRecordService;
@@ -37,7 +37,7 @@ public class WorkRecordServiceBeanTest {
 	private static DataManager dataManager;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@BeforeClass
+	//@BeforeClass
 	public static void setUp() throws Exception {
 		metadata = cont.metadata();
 		persistence = cont.persistence();
@@ -83,7 +83,7 @@ public class WorkRecordServiceBeanTest {
 	}
 
 	@Ignore
-	@Test
+	//@Test
 	public void testGetLatestDaysRecords() {
 
 		try (Transaction tx = persistence.createTransaction()) {
@@ -114,7 +114,7 @@ public class WorkRecordServiceBeanTest {
 	}
 
 	@Ignore
-	@Test
+	//@Test
 	public void testGetAccumulateQuantity() {
 
 		try (Transaction tx = persistence.createTransaction()) {
@@ -132,14 +132,14 @@ public class WorkRecordServiceBeanTest {
 
 	}
 
-	@Test
+	//@Test
 	@Ignore
 	public void testGetLatestRecord() {
 		testGetLatestRecordTest();
 	}
 
 	@Ignore
-	@Test
+	//@Test
 	public void testGetLatestRecordTest() {
 
 		try (Transaction tx = persistence.createTransaction()) {
