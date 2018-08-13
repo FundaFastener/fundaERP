@@ -28,7 +28,8 @@
     <class>com.haulmont.cuba.core.entity.ScheduledTask</class>
     <class>com.haulmont.cuba.core.entity.ScheduledExecution</class>
     <class>com.haulmont.cuba.core.entity.QueryResult</class>
-    <class>com.haulmont.cuba.core.entity.RestApiToken</class>
+    <class>com.haulmont.cuba.core.entity.AccessToken</class>
+    <class>com.haulmont.cuba.core.entity.RefreshToken</class>
     <class>com.haulmont.cuba.security.entity.User</class>
     <class>com.haulmont.cuba.security.entity.Role</class>
     <class>com.haulmont.cuba.security.entity.UserRole</class>
@@ -62,6 +63,8 @@
     <class>com.company.funda.erp.entity.Machine</class>
     <class>com.company.funda.erp.entity.WorkOrder</class>
     <class>com.company.funda.erp.entity.WorkRecord</class>
+    <class>com.company.funda.erp.entity.MachineProcesses</class>
+    <class>com.company.funda.erp.entity.PartProcessesStandard</class>
     <exclude-unlisted-classes/>
     <properties>
       <property name="eclipselink.cache.coordination.propagate-asynchronously" value="false"/>

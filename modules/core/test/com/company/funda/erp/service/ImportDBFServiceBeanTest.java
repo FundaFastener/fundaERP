@@ -41,7 +41,7 @@ public class ImportDBFServiceBeanTest {
 		importDBFService = AppBeans.get(ImportDBFService.class);
 	}
 	
-	@Test
+	//@Test
 	public void testInventoryItem() {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put(ImportDBFService.TYPE_KEY, InventoryItem.class);
