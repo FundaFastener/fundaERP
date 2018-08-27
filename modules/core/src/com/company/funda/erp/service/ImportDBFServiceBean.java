@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import com.company.funda.erp.FundaCoreConfig;
+import com.company.funda.erp.util.SystemUtil;
 import org.jamel.dbf.processor.DbfProcessor;
 import org.jamel.dbf.processor.DbfRowMapper;
 import org.slf4j.Logger;
@@ -48,7 +49,7 @@ public class ImportDBFServiceBean implements ImportDBFService {
 	@Override
 	public <E extends StandardEntity> List<E> loadFromDBF(Map<String, Object> params) {
 		DbfBean dbfBean = getDbfBean((Class<E>) params.get(ImportDBFService.TYPE_KEY));
-		String fileName = fundaCoreConfig.getDbfPartition()+dbfBean.getFileName();
+		String fileName = getPartitionDependsOnOS()+dbfBean.getFileName();
 		Path dbf = Paths.get(fileName);
 		return (List<E>) DbfProcessor.loadData(dbf.toFile(), (DbfRowMapper<E>) dbfBean.getDbfRowMapper(params));
 	}
@@ -63,6 +64,17 @@ public class ImportDBFServiceBean implements ImportDBFService {
 			dbfBean = new WorkOrderDbfBean();
 		}
 		return dbfBean;
+	}
+
+	private String getPartitionDependsOnOS(){
+		String partition = "";
+		if(SystemUtil.isWindows()){
+			partition = fundaCoreConfig.getDbfPartition();
+		}else if (SystemUtil.isMac()){
+			partition = fundaCoreConfig.getDbfPartitionMac();
+
+		}
+		return partition;
 	}
 
 	@Override
@@ -115,7 +127,7 @@ public class ImportDBFServiceBean implements ImportDBFService {
 					entityManager.persist(m);
 					counter.incrementAndGet();
 				} else if (dbfImportType == DbfImportType.MANDATORY_OVERWRITE) {
-					//TODO-H Ask Jeremy how to do?
+
 					m.setId(dbMachine.getId());
 					dbMachine.getProcessTypes().forEach(dmp->{
 						entityManager.remove(dmp);

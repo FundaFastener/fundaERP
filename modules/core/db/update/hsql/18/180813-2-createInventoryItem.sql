@@ -1,0 +1,1 @@
+create unique index IDX_FE_INVENTORY_ITEM_UNIQ_NO_ on FE_INVENTORY_ITEM (NO_) ;
