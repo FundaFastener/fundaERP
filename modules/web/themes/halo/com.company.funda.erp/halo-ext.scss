@@ -24,4 +24,27 @@
 	 	background-color: #F0F8FF;
 	 }
 
+	.borderImage{
+		border: 5px solid transparent;
+		padding: 5px;
+		border-color :red;
+	}
+
+}
+
+
+@media print {
+
+	.c-app-menubar, .v-tabsheet-tabcontainer-c-main-tabsheet,
+	.v-slot-notPrint * {
+		display: none;
+	}
+
+	.printArea {
+		background: white;
+		width: 21cm;
+		height: 29.7cm;
+		display: block;
+		box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+	}
 }

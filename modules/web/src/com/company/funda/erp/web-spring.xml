@@ -20,6 +20,8 @@
                        value="com.company.funda.erp.service.PartProcessesService"/>
                 <entry key="fe_ImportExcelService"
                        value="com.company.funda.erp.service.ImportExcelService"/>
+                <entry key="fe_QRCodeService"
+                       value="com.company.funda.erp.service.QRCodeService"/>
             </map>
         </property>
     </bean>

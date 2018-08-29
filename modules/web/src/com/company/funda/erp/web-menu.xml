@@ -22,4 +22,8 @@
     </menu>
     <menu id="reports"
           insertBefore="administration"/>
+    <menu id="UtilitiesPage"
+          insertBefore="administration">
+        <item screen="QRCodeGenerator"/>
+    </menu>
 </menu-config>
