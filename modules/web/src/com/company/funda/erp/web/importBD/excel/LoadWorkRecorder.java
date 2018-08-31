@@ -67,6 +67,7 @@ public class LoadWorkRecorder extends AbstractWindow {
                     }
                     for (Cell cell : row) {
                         logger.info("{}:{}",cell.getColumnIndex() ,cell.getStringCellValue());
+
                     }
                 }
                 logger.info("------ ----- -----");

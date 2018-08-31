@@ -15,6 +15,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
+import com.company.funda.erp.annotations.ExcelPointer;
 import com.company.funda.erp.enums.OperateType;
 import com.company.funda.erp.enums.WorkHourType;
 import com.company.funda.erp.enums.WorkOrderUnit;
@@ -33,6 +34,7 @@ public class WorkRecord extends StandardEntity {
     @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "open"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "WORK_ORDER_ID")
+    @ExcelPointer(index = {6})
     protected WorkOrder workOrder;
 
     @Column(name = "OPERATE_TYPE")
@@ -45,18 +47,22 @@ public class WorkRecord extends StandardEntity {
     @Lookup(type = LookupType.DROPDOWN, actions = {"lookup", "open"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EMPLOYEE_ID")
+    @ExcelPointer(index = {5})
     protected Employee employee;
 
     @Column(name = "WORK_HOUR_TYPE")
+    @ExcelPointer(index = {20})
     protected Integer workHourType;
 
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull(message = "{msg://com.company.funda.erp.entity/NotNull}")
     @Column(name = "START_TIME", nullable = false)
+    @ExcelPointer(index = {0,1,2,13,15})
     protected Date startTime;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "END_TIME")
+    @ExcelPointer(index = {0,1,2,16,18})
     protected Date endTime;
 
     @Column(name = "TIME_USED")
@@ -75,14 +81,17 @@ public class WorkRecord extends StandardEntity {
 
     @DecimalMin(message = "+", value = "0")
     @Column(name = "FINISHED_QUANTITY")
+    @ExcelPointer(index = {27})
     protected BigDecimal finishedQuantity;
 
     @DecimalMin(message = "+", value = "0")
     @Column(name = "SETUP_LOSS_QUANTITY")
+    @ExcelPointer(index = {22})
     protected BigDecimal setupLossQuantity;
 
     @DecimalMin(message = "+", value = "0")
     @Column(name = "NG_LOSS_QUANTITY")
+    @ExcelPointer(index = {23})
     protected BigDecimal ngLossQuantity;
 
     @DecimalMin(message = "+", value = "0")
@@ -100,6 +109,7 @@ public class WorkRecord extends StandardEntity {
 
     @Lob
     @Column(name = "REMARK")
+    @ExcelPointer(index = {48})
     protected String remark;
 
     public Long getRecordNo() {

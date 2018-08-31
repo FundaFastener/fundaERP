@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://QRCodeGenerator"
+        class="com.company.funda.erp.web.util.QRCodeGenerator"
+        messagesPack="com.company.funda.erp.web.util">
+    <dialogMode height="600"
+                width="800"/>
+    <layout>
+        <groupBox id="groupBox"
+                  spacing="true">
+            <textArea id="textArea"
+                      required="true"
+                      stylename="notPrint"/>
+            <button id="button"
+                    caption="mainMsg://ok"
+                    invoke="doGenerateQRCode"
+                    stylename="notPrint"/>
+            <scrollBox height="900px"
+                       responsive="true"
+                       scrollBars="both"
+                       stylename="printArea"
+                       width="650px">
+                <flowBox id="flowBox"
+                         spacing="true"/>
+            </scrollBox>
+        </groupBox>
+    </layout>
+</window>

@@ -1,23 +1,23 @@
 <Context>
     <!-- Database connection -->
-    <Resource driverClassName="org.postgresql.Driver"
+    <Resource driverClassName="org.hsqldb.jdbc.JDBCDriver"
               maxIdle="2"
               maxTotal="20"
               maxWaitMillis="5000"
               name="jdbc/CubaDS"
-              password="funda"
+              password=""
               type="javax.sql.DataSource"
-              url="jdbc:postgresql://localhost/fe"
-              username="funda_dev"/>
+              url="jdbc:hsqldb:hsql://localhost/fe"
+              username="sa"/>
     <!-- Switch off session serialization -->
     <Manager pathname=""/>
-    <!--<Resource driverClassName="org.hsqldb.jdbc.JDBCDriver"
+    <!--<Resource driverClassName="org.postgresql.Driver"
           maxIdle="2"
           maxTotal="20"
           maxWaitMillis="5000"
           name="jdbc/CubaDS"
-          password=""
+          password="funda"
           type="javax.sql.DataSource"
-          url="jdbc:hsqldb:hsql://localhost/fe"
-          username="sa"/>-->
+          url="jdbc:postgresql://localhost/fe"
+          username="funda_dev"/>-->
 </Context>
