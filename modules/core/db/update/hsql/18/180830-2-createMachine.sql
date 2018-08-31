@@ -1,0 +1,3 @@
+alter table FE_MACHINE add constraint FK_FE_MACHINE_ON_DEPARTMENT foreign key (DEPARTMENT_ID) references FE_DEPARTMENT(ID);
+create unique index IDX_FE_MACHINE_UNIQ_NO_ on FE_MACHINE (NO_) ;
+create index IDX_FE_MACHINE_ON_DEPARTMENT on FE_MACHINE (DEPARTMENT_ID);
