@@ -65,4 +65,6 @@
             template="com/company/funda/erp/web/importBD/excel/LoadWorkRecorder.xml"/>
     <screen id="AskPreLoadExcel"
             template="com/company/funda/erp/web/importBD/excel/AskPreLoadExcel.xml"/>
+    <screen id="QRCodeGenerator"
+            template="com/company/funda/erp/web/util/QRCodeGenerator.xml"/>
 </screen-config>

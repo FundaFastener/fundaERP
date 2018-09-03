@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import com.company.funda.erp.enums.ProcessType;
 import org.apache.commons.lang3.StringUtils;
 import org.jamel.dbf.processor.DbfRowMapper;
 import org.slf4j.Logger;
@@ -68,9 +69,9 @@ public class WorkOrderDbfBean implements DbfBean {
 		return new DbfRowMapper<WorkOrder>() {
 
 			public WorkOrder mapRow(Object[] row) {
-				if (StringUtils.isNotBlank(dencodeBig5(row[14]))) {
-					return null;
-				}
+//				if (StringUtils.isNotBlank(dencodeBig5(row[14]))) {
+//					return null;
+//				}
 				String minguoDate = dencodeBig5(row[10]);
 				if(!isValidMinguo(minguoDate)) {
 					return null;
@@ -101,8 +102,9 @@ public class WorkOrderDbfBean implements DbfBean {
 					workOrder.setDefaultMachine(defaultMachine);
 					workOrder.setQuantity(new BigDecimal((Double) row[3]));
 					workOrder.setUnit(WorkOrderUnit.PC);
-					workOrder.setProcessType(null);//TODO-H Ask Jeremy how to do?
+					workOrder.setProcessType(ProcessType.FORMING);
 					workOrder.setStatus(WorkOrderStatus.NOT_STARTED);
+					workOrder.setRemark(dencodeBig5(row[16]));
 
 				} catch (Exception e) {
 					logger.error("dataNo:{} , {}", dataNo,e.getMessage());

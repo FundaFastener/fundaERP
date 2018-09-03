@@ -51,4 +51,5 @@ public class SampleIntegrationTest {
             assertEquals(1, users.size());
         }
     }
+
 }

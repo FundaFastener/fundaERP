@@ -1,6 +1,6 @@
 -- begin FE_COMPANY
 create table FE_COMPANY (
-    ID uuid,
+    ID varchar(36) not null,
     VERSION integer not null,
     CREATE_TS timestamp,
     CREATED_BY varchar(50),
@@ -18,7 +18,7 @@ create table FE_COMPANY (
 -- end FE_COMPANY
 -- begin FE_DEPARTMENT
 create table FE_DEPARTMENT (
-    ID uuid,
+    ID varchar(36) not null,
     VERSION integer not null,
     CREATE_TS timestamp,
     CREATED_BY varchar(50),
@@ -29,14 +29,14 @@ create table FE_DEPARTMENT (
     --
     NO_ varchar(6) not null,
     NAME varchar(50) not null,
-    MANAGED_BY_ID uuid,
+    MANAGED_BY_ID varchar(36),
     --
     primary key (ID)
 )^
 -- end FE_DEPARTMENT
 -- begin FE_EMPLOYEE
 create table FE_EMPLOYEE (
-    ID uuid,
+    ID varchar(36) not null,
     VERSION integer not null,
     CREATE_TS timestamp,
     CREATED_BY varchar(50),
@@ -52,14 +52,14 @@ create table FE_EMPLOYEE (
     LAST_NAME_EN varchar(10),
     FIRST_NAME_OTHER varchar(30),
     LAST_NAME_OTHER varchar(30),
-    DEPARTMENT_ID uuid,
+    DEPARTMENT_ID varchar(36),
     --
     primary key (ID)
 )^
 -- end FE_EMPLOYEE
 -- begin FE_INVENTORY_ITEM
 create table FE_INVENTORY_ITEM (
-    ID uuid,
+    ID varchar(36) not null,
     VERSION integer not null,
     CREATE_TS timestamp,
     CREATED_BY varchar(50),
@@ -80,7 +80,7 @@ create table FE_INVENTORY_ITEM (
 -- end FE_INVENTORY_ITEM
 -- begin FE_MACHINE
 create table FE_MACHINE (
-    ID uuid,
+    ID varchar(36) not null,
     VERSION integer not null,
     CREATE_TS timestamp,
     CREATED_BY varchar(50),
@@ -93,15 +93,15 @@ create table FE_MACHINE (
     NAME varchar(50) not null,
     TYPE_ integer,
     BRAND varchar(30),
-    DEPARTMENT_ID uuid,
-    REMARK text,
+    DEPARTMENT_ID varchar(36),
+    REMARK longvarchar,
     --
     primary key (ID)
 )^
 -- end FE_MACHINE
 -- begin FE_WORK_ORDER
 create table FE_WORK_ORDER (
-    ID uuid,
+    ID varchar(36) not null,
     VERSION integer not null,
     CREATE_TS timestamp,
     CREATED_BY varchar(50),
@@ -111,21 +111,21 @@ create table FE_WORK_ORDER (
     DELETED_BY varchar(50),
     --
     NO_ varchar(20) not null,
-    INVENTORY_ITEM_ID uuid not null,
+    INVENTORY_ITEM_ID varchar(36) not null,
     QUANTITY decimal(20) not null,
     UNIT integer not null,
     PROCESS_TYPE integer not null,
-    DEFAULT_MACHINE_ID uuid not null,
-    BACKUP_MACHINES_ID uuid,
+    DEFAULT_MACHINE_ID varchar(36) not null,
+    BACKUP_MACHINES_ID varchar(36),
     STATUS integer,
-    REMARK text,
+    REMARK longvarchar,
     --
     primary key (ID)
 )^
 -- end FE_WORK_ORDER
 -- begin FE_WORK_RECORD
 create table FE_WORK_RECORD (
-    ID uuid,
+    ID varchar(36) not null,
     VERSION integer not null,
     CREATE_TS timestamp,
     CREATED_BY varchar(50),
@@ -134,10 +134,10 @@ create table FE_WORK_RECORD (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    WORK_ORDER_ID uuid not null,
+    WORK_ORDER_ID varchar(36) not null,
     OPERATE_TYPE integer,
     RECORD_NO bigint not null,
-    EMPLOYEE_ID uuid,
+    EMPLOYEE_ID varchar(36),
     WORK_HOUR_TYPE integer,
     START_TIME timestamp not null,
     END_TIME timestamp,
@@ -152,14 +152,14 @@ create table FE_WORK_RECORD (
     SETUP_LOSS_UNIT integer,
     NG_LOSS_UNIT integer,
     MATERIAL_LOSS_UNIT integer,
-    REMARK text,
+    REMARK longvarchar,
     --
     primary key (ID)
 )^
 -- end FE_WORK_RECORD
 -- begin FE_MACHINE_PROCESSES
 create table FE_MACHINE_PROCESSES (
-    ID uuid,
+    ID varchar(36) not null,
     VERSION integer not null,
     CREATE_TS timestamp,
     CREATED_BY varchar(50),
@@ -168,7 +168,7 @@ create table FE_MACHINE_PROCESSES (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    MACHINE_ID uuid not null,
+    MACHINE_ID varchar(36) not null,
     PROCESS_TYPE integer not null,
     ATTRIBUTE integer,
     --
@@ -177,7 +177,7 @@ create table FE_MACHINE_PROCESSES (
 -- end FE_MACHINE_PROCESSES
 -- begin FE_PART_PROCESSES_STANDARD
 create table FE_PART_PROCESSES_STANDARD (
-    ID uuid,
+    ID varchar(36) not null,
     VERSION integer not null,
     CREATE_TS timestamp,
     CREATED_BY varchar(50),
@@ -186,8 +186,8 @@ create table FE_PART_PROCESSES_STANDARD (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    PART_NO_ID uuid not null,
-    PROCESS_TYPE_ID uuid not null,
+    PART_NO_ID varchar(36) not null,
+    PROCESS_TYPE_ID varchar(36) not null,
     FROM_ date not null,
     TO_ date,
     OUTPUT_ integer,
@@ -201,7 +201,7 @@ create table FE_PART_PROCESSES_STANDARD (
 -- end FE_PART_PROCESSES_STANDARD
 -- begin FE_TEST
 create table FE_TEST (
-    ID uuid,
+    ID varchar(36) not null,
     VERSION integer not null,
     CREATE_TS timestamp,
     CREATED_BY varchar(50),

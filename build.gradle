@@ -73,6 +73,7 @@ configure(globalModule) {
         compile('org.jamel.dbf:dbf-reader:0.0.3')
         compile('org.apache.poi:poi-ooxml:3.17')
         compile('com.monitorjbl:xlsx-streamer:1.2.0')
+        compile('com.google.zxing:core:3.3.3')
     }
     task enhance(type: CubaEnhancing)
 
