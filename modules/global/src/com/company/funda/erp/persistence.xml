@@ -12,5 +12,6 @@
         <class>com.company.funda.erp.entity.WorkRecord</class>
         <class>com.company.funda.erp.entity.MachineProcesses</class>
         <class>com.company.funda.erp.entity.PartProcessesStandard</class>
+        <class>com.company.funda.erp.entity.Test</class>
     </persistence-unit>
 </persistence>
